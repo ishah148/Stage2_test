@@ -1,6 +1,6 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
-
+import { aaaa } from '../test';
 class App {
     constructor() {
         this.controller = new AppController();
@@ -8,6 +8,7 @@ class App {
     }
 
     start() {
+        console.log(aaaa);
         document
             .querySelector('.sources')
             .addEventListener('click', (e) => this.controller.getNews(e, (data) => this.view.drawNews(data)));
