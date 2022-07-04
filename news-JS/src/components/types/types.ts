@@ -27,6 +27,7 @@ export interface IAllNews {
     status: string;
     totalResults: number;
     articles: INews[];
+    sources?: ISourcesData[];
 }
 
 export interface INews {
@@ -41,4 +42,19 @@ export interface INews {
     title: string;
     url: string;
     urlToImage: string;
+}
+
+export interface ICallbackNews {
+    (data: IAllNews): void;
+}
+export interface ICallbackSources {
+    (data: ISources): void;
+}
+
+// export type Callback<T, U> = (data: T) => U;
+
+export type Callback<T> = (data?: T) => void;
+// export type Callback<T, U> = (data: T) => U;
+export interface IMyApi {
+    apiKey: string;
 }

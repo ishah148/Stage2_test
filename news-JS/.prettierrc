@@ -4,12 +4,5 @@
     "semi": true,
     "singleQuote": true,
     "printWidth": 120,
-    "rules": {
-        "prettier/prettier": [
-            "error",
-            {
-            "endOfLine": "auto"
-            }
-        ]
-    }
+    "endOfLine": "crlf"
 }
