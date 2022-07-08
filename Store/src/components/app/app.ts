@@ -12,10 +12,10 @@ class App {
     }
 
     start() {
-        (document.querySelector('.sources') as HTMLElement).addEventListener('click', (e) => {
-            this.controller.getNews(e, (data) => this.view.drawNews(data as IAllNews));
-        });
-        this.controller.getSources((data) => this.view.drawSources(data as ISources));
+        // (document.querySelector('.sources') as HTMLElement).addEventListener('click', (e) => {
+        //     this.controller.getNews(e, (data) => this.view.drawNews(data as IAllNews));
+        // });
+        // this.controller.getSources((data) => this.view.drawSources(data as ISources));
     }
 }
 
