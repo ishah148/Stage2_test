@@ -1,0 +1,21 @@
+import { ISourcesData } from '../../types/types';
+import './sources.scss';
+
+class Sources {
+    draw(data: ISourcesData[]): void {
+        const fragment = document.createDocumentFragment();
+        const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
+        data.forEach((item) => {
+            const sourceClone = sourceItemTemp.content.cloneNode(true) as HTMLElement;
+
+            (sourceClone.querySelector('.source__item-name') as HTMLElement).textContent = item.name;
+            sourceClone?.querySelector('.source__item')?.setAttribute('data-source-id', item.id);
+
+            fragment.append(sourceClone);
+        });
+
+        document.querySelector('.sources')?.append(fragment);
+    }
+}
+
+export default Sources;
