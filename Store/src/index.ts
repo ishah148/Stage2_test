@@ -26,25 +26,21 @@ import './global.scss';
 //         count: 4,
 //     },
 // };
-interface IData {
+type IData = {
     id: number;
     price: number;
-}
+};
 
 const obj: IData = {
     id: 1,
     price: 2,
 };
 
-// const x: IData[] = [obj, obj, obj, obj];
-
-console.log(123);
-// debugger;
-for (const i: string | number in obj) {
+for (const i in obj) {
     console.log(i);
-    console.log(obj[`${i}`]);
+    console.log(obj[i as keyof typeof obj]);
 }
-console.log(obj['id']);
+// console.log(obj['id']);
 // import { Tooltip, Toast, Popover } from 'boo';
 // const app = new App();
 // app.start();
