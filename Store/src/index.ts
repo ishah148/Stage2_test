@@ -1,6 +1,8 @@
 // import App from './components/app/app';
 // import Features from './components/controller/features';
 import './global.scss';
+import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '/node_modules/bootstrap/dist/js/bootstrap.min.js';
 // interface IData {
 //     id: number;
 //     title: string;
