@@ -1,76 +1,78 @@
-interface IApiData {
-    id: number;
-    name: string;
-    price: number;
-    color: string;
-    countInCart: number;
-    description: string;
-}
+// interface IApiData {
+//     id: number;
+//     name: string;
+//     price: number;
+//     color: string;
+//     countInCart: number;
+//     description: string;
+// }
 
-interface IDataService {
-    getData(): IApiData[];
-}
+// interface IDataService {
+//     getData(): IApiData[];
+// }
 
-interface IDataStorage {
-    Allproducts: IApiData[];
-    filteredProducts: IApiData[];
-    cartData: IApiData[];
-}
+// interface IDataStorage {
+//     Allproducts: IApiData[];
+//     filteredProducts: IApiData[];
+//     cartData: IApiData[];
+// }
 
-class Store {
-    drowConponents(): void {
-        new Search();
-        new Filter();
-        new Cart();
-    }
-    render(): void {
-        // TODO update necessary components
-    }
-}
+// class Store {
+//     drowConponents(): void {
+//         new Search();
+//         new Filter();
+//         new Cart();
+//     }
+//     render(): void {
+//         // TODO update necessary components
+//     }
+// }
 
-class Search {
-    draw(): void {
-        //TODO  draw search bar
-    }
-}
+// class Search {
+//     draw(): void {
+//         //TODO  draw search bar
+//     }
+// }
 
-class Filter {
-    draw(): void {
-        //TODO  draw filter
-    }
-}
+// class Filter {
+//     draw(): void {
+//         //TODO  draw filter
+//     }
+// }
 
-class Cart {
-    draw(): void {
-        //TODO dwar Cards
-    }
-}
+// class Cart {
+//     draw(): void {
+//         //TODO dwar Cards
+//     }
+// }
 
-interface IData {
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    category: string;
-    image: string;
-    rating: {
-        rate: number;
-        count: number;
-    };
-}
+// interface IData {
+//     id: number;
+//     title: string;
+//     price: number;
+//     description: string;
+//     category: string;
+//     image: string;
+//     rating: {
+//         rate: number;
+//         count: number;
+//     };
+// }
 
-const obj: IData = {
-    id: 1,
-    title: 'string',
-    price: 2,
-    description: 'string',
-    category: 'string',
-    image: 'string',
-    rating: {
-        rate: 3,
-        count: 4,
-    },
-};
+// const obj: IData = {
+//     id: 1,
+//     title: 'string',
+//     price: 2,
+//     description: 'string',
+//     category: 'string',
+//     image: 'string',
+//     rating: {
+//         rate: 3,
+//         count: 4,
+//     },
+// };
+
+
 
 
 interface IProduct {
@@ -88,7 +90,7 @@ interface Filter {
 }
 
 interface IProductService {
-    getProducts(filter: Filter | null = null): Promise<IProduct[]>;
+    getProducts(filter: Filter | null): Promise<IProduct[]>;
 }
 
 interface IApiClient {
@@ -161,5 +163,3 @@ class CartComponent implements IComponent {
         this.cart.getAllItems(); // TODO draw each item
     }
 }
-
-const x: IData[] = [obj, obj, obj, obj];
