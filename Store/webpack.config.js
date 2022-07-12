@@ -18,15 +18,32 @@ const baseConfig = {
                 use: 'ts-loader',
             },
             {
-                test: /\.s[ac]ss$/i,
-                use: [
-                    // Creates `style` nodes from JS strings
-                    "style-loader",
-                    // Translates CSS into CommonJS
-                    "css-loader",
-                    // Compiles Sass to CSS
-                    "sass-loader",
-                ]
+                test: /\.(scss)$/,
+                use: [{
+                    // вставить CSS на страницу
+                    loader: 'style-loader'
+                }, {
+                    // переводит CSS в модули CommonJS
+                    loader: 'css-loader'
+                }, {
+                    // Выполнить действия postcss
+                    loader: 'postcss-loader',
+                    options: {
+                        // `postcssOptions` требуется для postcss 8.x;
+                        // если Вы используете postcss 7.x пропустите ключ
+                        postcssOptions: {
+                            // плагины postcss, можно экспортировать в postcss.config.js
+                            plugins: function () {
+                                return [
+                                    require('autoprefixer')
+                                ];
+                            }
+                        }
+                    }
+                }, {
+                    // компилирует Sass в CSS
+                    loader: 'sass-loader'
+                }]
             }
         ],
     },
@@ -57,3 +74,17 @@ module.exports = ({ mode }) => {
 
     return merge(baseConfig, envConfig);
 };
+
+
+
+// {
+//     test: /\.s[ac]ss$/i,
+//     use: [
+//         // Creates `style` nodes from JS strings
+//         "style-loader",
+//         // Translates CSS into CommonJS
+//         "css-loader",
+//         // Compiles Sass to CSS
+//         "sass-loader",
+//     ]
+// }
