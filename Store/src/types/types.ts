@@ -1,44 +1,38 @@
-export type ApiData = {
-    id: string;
+interface IProduct {
+    id: number;
     name: string;
+    price: number;
+    color: string;
     description: string;
-    url: string;
-    category: string;
-    language: string;
-    country: string;
-};
-
-export interface ISourcesData {
-    id: string;
-    name: string;
-    description: string;
-    url: string;
-    category: string;
-    language: string;
-    country: string;
 }
 
-export interface ISources {
-    status: string;
-    sources: ISourcesData[];
+interface Filter {
+    query: string;
+    priceFrom: number;
+    priceTo: number;
 }
 
-export interface IAllNews {
-    status: string;
-    totalResults: number;
-    articles: INews[];
+interface IProductService {
+    getProducts(filter: Filter | null): Promise<IProduct[]>;
 }
 
-export interface INews {
-    author: string;
-    content: string;
-    description: string;
-    publishedAt: string;
-    source: {
-        id: string;
-        name: string;
-    };
-    title: string;
-    url: string;
-    urlToImage: string;
+interface IApiClient {
+    getProducts(): Promise<IProduct[]>;
+}
+
+interface ICart {
+    getAllItems(): ICartItem[];
+
+    add(product: IProduct): void;
+
+    remove(product: IProduct): void;
+}
+
+interface ICartItem {
+    product: IProduct;
+    amount: number;
+}
+
+interface IComponent {
+    render(): void;
 }
