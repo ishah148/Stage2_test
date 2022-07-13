@@ -28,6 +28,7 @@ export class ProductsComponent implements IComponent {
         <div class="product-card card">
             <img src="${obj.imageSrc}" class="card-img-top" alt="...">
             <div class="product-card__body  card-body">
+                <h6 class="product-card__name card-title">${obj.name}</h6>
                 <div class="container d-flex justify-content-between align-items-center">
                     <h6 class="product-card__price card-title">${obj.price}</h6>
                     <div class="product-card__color" style="backgound="${obj.color}"></div>

@@ -6,7 +6,7 @@ header {
 main {
     // height: 500px;
 }
-.product-card__wrapper{
+.product-card__wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 25px;
@@ -19,17 +19,20 @@ main {
         display: flex;
         flex-direction: column;
         img {
-            width: 150px;
+            width: 130px;
             align-self: center;
         }
-        .product-card__price {
-            margin-bottom: 0;
-        }
-        .product-card__color {
-            width: 30px;
-            height: 30px;
-            border-radius: 10px;
-            background: red;
+        .product-card__price-and-color {
+            padding: 0;
+            .product-card__price {
+                margin-bottom: 0;
+            }
+            .product-card__color {
+                width: 30px;
+                height: 30px;
+                border-radius: 10px;
+                background: red;
+            }
         }
         .product-card__add-to-cart {
             svg {
