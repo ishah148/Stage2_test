@@ -1,6 +1,7 @@
 // import App from './components/app/app';
 // import Features from './components/controller/features';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.scss';
 import './global.scss';
 import 'bootstrap';
 // import '/node_modules/bootstrap/dist/css/bootstrap.min.css';

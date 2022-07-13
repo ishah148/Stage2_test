@@ -16,8 +16,8 @@ const baseConfig = {
             },
             {
                 test: /\.ts$/i,
+                exclude: /test.ts/i,
                 use: 'ts-loader',
-                exclude: /test\.ts$/i
             },
             {
                 test: /\.(scss)$/,
@@ -46,6 +46,18 @@ const baseConfig = {
                     // компилирует Sass в CSS
                     loader: 'sass-loader'
                 }]
+            },
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                include: path.resolve(__dirname, './node_modules/bootstrap-icons/font/fonts'),
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'webfonts',
+                        publicPath: '../webfonts',
+                    },
+                }
             }
         ],
     },
