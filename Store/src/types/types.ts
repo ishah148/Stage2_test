@@ -20,6 +20,18 @@ export interface IComponent {
     render(): void;
 }
 
+export interface ICart {
+    getAllItems(): ICartItem[];
+
+    add(product: IProduct): void;
+
+    remove(product: IProduct): void;
+}
+
+export interface ICartItem {
+    product: IProduct;
+    amount: number;
+}
 // }
 //     // plug from promise to []
 //     // if(!filter){
@@ -46,4 +58,3 @@ export interface IComponent {
 //     product: IProduct;
 //     amount: number;
 // }
-

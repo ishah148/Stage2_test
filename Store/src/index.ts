@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.scss';
 import './global.scss';
 import 'bootstrap';
-
+import '../products_data/product.json';
 // import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import '/node_modules/bootstrap/dist/js/bootstrap.min.js';
 // interface IData {

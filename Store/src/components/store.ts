@@ -1,23 +1,25 @@
-import { IProductService, IComponent } from '../types/types';
+import ProductService from '../service/ProductService';
+import { IProductService, IComponent, ICart } from '../types/types';
+import { CartComponent } from './cart';
 
 export class StoreComponent implements IComponent {
     // constructor() {}
-    private productService: IProductService;
-    private cart: ICart;
-    private poductCards: CartComponent;
-
-    // private isLoaded = false;
-    // private products = null;
-
+    private cart!: ICart;
+    private productCards!: CartComponent;
+    private isLoaded = false;
+    private products = null;
+    private service: ProductService;
     constructor() {
-        this.load();
+        this.service = new ProductService();
+        // this.load();
+        // this.productCards = new CartComponent();
     }
 
     render(): void {
         console.log(123);
     }
     init(): void {
-        console.log(456);
+        console.log(this.service.getProducts(null));
     }
     // private async load() {
     //     this.products = await this.productService.getProducts();
@@ -44,5 +46,3 @@ export class StoreComponent implements IComponent {
     //     new Cart();
     // }
 }
-
-// export default StoreComponent;
