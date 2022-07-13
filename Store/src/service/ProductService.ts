@@ -10,7 +10,7 @@ class ProductService implements IProductService {
             console.log('!filter');
         }
         // const responce = await fetch('../Store/src/components/products_data/product.json');
-        const responce = await fetch('.product.json');
+        const responce = await fetch('assets/products_data/product.json');
         const data = await responce.json();
         // if (!filter) {
         //     render(data)

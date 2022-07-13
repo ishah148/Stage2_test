@@ -4,6 +4,7 @@ export interface IProduct {
     price: number;
     color: string;
     description: string;
+    imageSrc: string;
 }
 
 export interface IFilter {

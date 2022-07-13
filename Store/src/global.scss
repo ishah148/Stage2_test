@@ -1,11 +1,45 @@
 // @import "custom";
 // @import "~bootstrap/scss/bootstrap";
 
-header{
-
+header {
 }
-main{
-    height: 500px;
+main {
+    // height: 500px;
+}
+.product-card__wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+.product-card {
+    width: 200px;
+    padding: 10px;
+    .product-card__body {
+        display: flex;
+        flex-direction: column;
+        img {
+            width: 150px;
+            align-self: center;
+        }
+        .product-card__price {
+            margin-bottom: 0;
+        }
+        .product-card__color {
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: red;
+        }
+        .product-card__add-to-cart {
+            svg {
+                margin-bottom: 3px;
+            }
+        }
+        button {
+            align-self: center;
+        }
+    }
 }
 
 // * {
@@ -33,10 +67,6 @@ main{
 // .carousel-inner{
 //     height: 300px;
 // }
-
-
-
-
 
 // .bd-placeholder-img {
 //     font-size: 1.125rem;

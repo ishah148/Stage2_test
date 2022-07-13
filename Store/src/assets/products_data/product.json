@@ -1,23 +1,26 @@
 [
     {
         "id": 1,
-        "name": "good1",
+        "name": "redmi 9c",
         "price": 10,
         "color": "red",
-        "description": "lorem"
+        "description": "lorem",
+        "image": "../redmi9c.webp"
     },
     {
         "id": 2,
         "name": "good2",
         "price": 20,
         "color": "blue",
-        "description": "lorem"
+        "description": "lorem",
+        "image":"../galaxya03.webp"
     },
     {
         "id": 3,
         "name": "good3",
         "price": 30,
         "color": "green",
-        "description": "lorem"
+        "description": "lorem",
+        "image":"../redmi9c.webp"
     }
 ]

@@ -4,10 +4,11 @@ const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const EslingPlugin = require('eslint-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const baseConfig = {
     entry: path.resolve(__dirname, './src/index.ts'),
     mode: 'development',
-    
+
     module: {
         rules: [
             {
@@ -58,6 +59,10 @@ const baseConfig = {
                         publicPath: '../webfonts',
                     },
                 }
+            },
+            {
+                test: /\.json$/, 
+                loader: 'json',
             }
         ],
     },
@@ -75,6 +80,14 @@ const baseConfig = {
         }),
         new CleanWebpackPlugin(),
         new EslingPlugin({ extensions: 'ts' }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'src/assets'),
+                    to: path.resolve(__dirname, '../dist/assets'),
+                },
+            ],
+        }),
     ],
     devServer: {
         inline: true,
