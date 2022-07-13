@@ -1,4 +1,4 @@
-interface IProduct {
+export interface IProduct {
     id: number;
     name: string;
     price: number;
@@ -6,33 +6,44 @@ interface IProduct {
     description: string;
 }
 
-interface Filter {
+export interface IFilter {
     query: string;
     priceFrom: number;
     priceTo: number;
 }
 
-interface IProductService {
-    getProducts(filter: Filter | null): Promise<IProduct[]>;
+export interface IProductService {
+    getProducts(filter: IFilter | null): Promise<IProduct[]>;
 }
 
-interface IApiClient {
-    getProducts(): Promise<IProduct[]>;
-}
-
-interface ICart {
-    getAllItems(): ICartItem[];
-
-    add(product: IProduct): void;
-
-    remove(product: IProduct): void;
-}
-
-interface ICartItem {
-    product: IProduct;
-    amount: number;
-}
-
-interface IComponent {
+export interface IComponent {
     render(): void;
 }
+
+// }
+//     // plug from promise to []
+//     // if(!filter){
+//     //  await render(AllProductFromJSON)
+//     //}else{
+//     //await render(FilteredProducts)
+//     // }
+//     // render(getProducts())
+// }
+
+// interface IApiClient {
+//     getProducts(): Promise<IProduct[]>;
+// }
+
+// interface ICart {
+//     getAllItems(): ICartItem[];
+
+//     add(product: IProduct): void;
+
+//     remove(product: IProduct): void;
+// }
+
+// interface ICartItem {
+//     product: IProduct;
+//     amount: number;
+// }
+

@@ -1,9 +1,10 @@
-// import App from './components/app/app';
+import './components/app';
 // import Features from './components/controller/features';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.scss';
 import './global.scss';
 import 'bootstrap';
+
 // import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import '/node_modules/bootstrap/dist/js/bootstrap.min.js';
 // interface IData {
@@ -31,20 +32,20 @@ import 'bootstrap';
 //         count: 4,
 //     },
 // };
-type IData = {
-    id: number;
-    price: number;
-};
+// type IData = {
+//     id: number;
+//     price: number;
+// };
 
-const obj: IData = {
-    id: 1,
-    price: 2,
-};
+// const obj: IData = {
+//     id: 1,
+//     price: 2,
+// };
 
-for (const i in obj) {
-    console.log(i);
-    console.log(obj[i as keyof typeof obj]);
-}
+// for (const i in obj) {
+//     console.log(i);
+//     console.log(obj[i as keyof typeof obj]);
+// }
 // console.log(obj['id']);
 // import { Tooltip, Toast, Popover } from 'boo';
 // const app = new App();

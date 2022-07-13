@@ -75,6 +75,9 @@
 
 
 
+
+
+
 // interface IProduct {
 //     id: number;
 //     name: string;
@@ -108,7 +111,7 @@
 // }
 //     // plug from promise to []
 //     // if(!filter){
-//     //  await render(AllProductFromJSON)  
+//     //  await render(AllProductFromJSON)
 //     //}else{
 //     //await render(FilteredProducts)
 //     // }
@@ -136,7 +139,7 @@
 //     render(): void;
 // }
 
-// class 
+// class
 
 // class StoreComponent implements IComponent {
 //     private productService: IProductService;
@@ -159,7 +162,6 @@
 
 //     protected renderCart(data): void { // start rendering
 //         // this.render(this.productService.filterData(data))
-
 
 //     }
 //     protected renderProducts(): void { // start rendering
@@ -189,21 +191,20 @@
 
 // class FilterComponent implements IComponent {
 
-//     // onsumbit = 
+//     // onsumbit =
 //     render(): void {
 //         //TODO  draw filter
 //     }
 // }
 
 // class CartComponent implements IComponent {
-    
+
 //     private cart: ICart;
 
 //     render(): void {
 //         this.cart.getAllItems(); // TODO draw each item
 //     }
 // }
-
 
 // class ProductsComponent implements IComponent {
 //     constructor(private data: IProduct[]) {
