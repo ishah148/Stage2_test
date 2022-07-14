@@ -12,7 +12,8 @@ export class StoreComponent implements IComponent {
     constructor() {
         this.service = new ProductService();
         // this.products = new ProductsComponent(callback);
-        this.products = new ProductsComponent(this.service.getActualProducts);
+        this.products = new ProductsComponent();
+        this.load();
         // this.getActualProducts();
         // this.productCards = new CartComponent();
     }
@@ -21,14 +22,15 @@ export class StoreComponent implements IComponent {
         console.log(123);
     }
     init(): void {
-        // console.log(this.service.getProducts(null));
+        console.log('init');
     }
-    // private async load() {
-    //     this.products = await this.productService.getProducts();
-    //     this.isLoaded = true;
-
-    //     this.render();
-    // }
+    async load() {
+        this.init();
+        debugger;
+        const data = await this.service.getProducts(null);
+        this.isLoaded = true;
+        this.products.render(this.service.getActualProducts.bind(this));
+    }
 
     // protected renderCart(data): void {
     //     // start rendering

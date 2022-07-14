@@ -29,6 +29,7 @@ class ProductService implements IProductService {
     }
 
     getActualProducts() {
+        // console.log(this.data);
         return this.data;
     }
 }
