@@ -3,22 +3,37 @@ import { IComponent, IProduct } from '../types/types';
 export class ProductsComponent implements IComponent {
     wrapper: HTMLElement;
     productsData: IProduct[] | null;
-    constructor(callback) {
+    // callback: Callback<T>;
+    constructor() {
         this.init();
         this.wrapper = <HTMLElement>document.querySelector('.product-card__wrapper');
         this.productsData = null;
+        // this.callback;
     }
 
     init() {
         // this.wrapper = document.getElementById('ProductsComponent')
     }
 
-    render() {
+    render(callback: () => IProduct[]) {
         console.log('ProductsComponent');
-        this.callback().forEach(data => {
-            this.wrapper.insertAdjacentHTML('beforeend', this.getHTML(data))
+        callback().forEach((data: IProduct) => {
+            return this.wrapper.insertAdjacentHTML('beforeend', this.getHTML(data));
         });
     }
+
+    recieveCallback<T>(cb: T) {
+        // return cb;
+        // this.callbackFilteredData = cb;
+    }
+
+    // render(callback: Callback<T>) {
+    //     console.log('ProductsComponent');
+    //     callback(/*IProduct[]*/).forEach(data => {
+    //         this.wrapper.insertAdjacentHTML('beforeend', this.getHTML(data))
+    //     });
+    // }
+
     // render(data): void {
     //     if(isHaveCards()){
     //         removeAll()
@@ -26,8 +41,8 @@ export class ProductsComponent implements IComponent {
     //     this.wrapper.insertAdjacentHTML('',html)
     //     // this.cart.getAllItems(); // TODO draw each item
     // }
-    getHTML(obj: IProduct) {
-        const html = `
+    getHTML(obj: IProduct): string {
+        return `
         <div class="product-card card">
             <img src="${obj.imageSrc}" class="card-img-top" alt="...">
             <div class="product-card__body  card-body">

@@ -17,9 +17,14 @@ export interface IProductService {
     getProducts(filter: IFilter | null): Promise<IProduct[]>;
 }
 
+// export type Callback<T> = (data: T) => IProduct[];
+
 export interface IComponent {
-    render(): void;
+    render(callback: () => IProduct[]): void;
 }
+// export interface IComponent<T> {
+//     render(callback: Callback<T>): void;
+// }
 
 export interface ICart {
     getAllItems(): ICartItem[];
