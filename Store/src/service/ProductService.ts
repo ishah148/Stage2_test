@@ -6,31 +6,35 @@ class ProductService implements IProductService {
     private filteredData: IProduct[] = []; //  current data for rendering components
     private cartData: IProduct[] = [];
     private url: string = './assets/products_data/product.json';
-    constructor() {
-        this.getProducts(null);
+    private renderProductsCb: () => void;
+    constructor(renderProductsCb: () => void) {
+        this.renderProductsCb = renderProductsCb;
+        // this.getProducts(null);
+        this.init();
     }
-    // private Storage: IProduct[];
-    // filterData(data: IProduct[]): IProduct[]
-    // async getProducts(filter: IFilter | null): Promise<IProduct[]>;
+
     async getProducts(filter: IFilter | null): Promise<IProduct[]> {
         if (!filter) {
             console.log('!filter');
         }
         // const responce = await fetch('../Store/src/components/products_data/product.json');
         const responce = await fetch(this.url);
-        console.log(responce);
-        this.data = await responce.json();
-        console.log(this.data);
-        return this.data;
+        const data = await responce.json();
+        return data;
     }
 
-    firstRender() {
-        // draw callbacks
+    async init() {
+        this.filteredData = await this.getProducts(null);
     }
 
     getActualProducts() {
-        // console.log(this.data);
-        return this.data;
+        this.renderProducts();
+        return this.filteredData;
+    }
+    renderProducts(): void {
+        // console.log(this.renderProductsCb);
+        this.renderProductsCb();
     }
 }
+
 export default ProductService;

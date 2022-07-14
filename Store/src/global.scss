@@ -15,13 +15,16 @@ main {
 .product-card {
     width: 200px;
     padding: 10px;
+    img {
+        width: 130px;
+        height: 200px;
+        object-fit: contain;
+        align-self: center;
+    }
     .product-card__body {
         display: flex;
         flex-direction: column;
-        img {
-            width: 130px;
-            align-self: center;
-        }
+
         .product-card__price-and-color {
             padding: 0;
             .product-card__price {

@@ -1,5 +1,5 @@
 import { IComponent } from '../types/types';
-import { StoreComponent } from './store';
+import { StoreComponent } from './StoreComponent';
 
 class SearchComponent extends StoreComponent implements IComponent {
     search() {

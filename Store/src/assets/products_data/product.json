@@ -5,7 +5,7 @@
         "price": 10,
         "color": "red",
         "description": "lorem",
-        "image": "../redmi9c.webp"
+        "imageSrc": "./assets/redmi9c.webp"
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "price": 20,
         "color": "blue",
         "description": "lorem",
-        "image":"../galaxya03.webp"
+        "imageSrc":"./assets/galaxya03.webp"
     },
     {
         "id": 3,
@@ -21,6 +21,6 @@
         "price": 30,
         "color": "green",
         "description": "lorem",
-        "image":"../redmi9c.webp"
+        "imageSrc":"./assets/redmi9c.webp"
     }
 ]
