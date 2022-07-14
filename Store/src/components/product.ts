@@ -3,7 +3,7 @@ import { IComponent, IProduct } from '../types/types';
 export class ProductsComponent implements IComponent {
     wrapper: HTMLElement;
     productsData: IProduct[] | null;
-    constructor(private data: IProduct[]) {
+    constructor(callback) {
         this.init();
         this.wrapper = <HTMLElement>document.querySelector('.product-card__wrapper');
         this.productsData = null;
@@ -15,6 +15,9 @@ export class ProductsComponent implements IComponent {
 
     render() {
         console.log('ProductsComponent');
+        this.callback().forEach(data => {
+            this.wrapper.insertAdjacentHTML('beforeend', this.getHTML(data))
+        });
     }
     // render(data): void {
     //     if(isHaveCards()){
