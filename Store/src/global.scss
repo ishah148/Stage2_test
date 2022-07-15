@@ -7,10 +7,18 @@ main {
     // height: 500px;
 }
 .product-card__wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(4, 1fr);
     justify-content: center;
+    gap: 25px;
+    padding: 20px;
+    @media (max-width: 920px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 700px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 .product-card {
     width: 200px;
@@ -24,7 +32,10 @@ main {
     .product-card__body {
         display: flex;
         flex-direction: column;
-
+        // height: 161px;
+        .card-text {
+            height: 50px;
+        }
         .product-card__price-and-color {
             padding: 0;
             .product-card__price {

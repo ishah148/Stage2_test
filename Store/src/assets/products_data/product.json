@@ -13,7 +13,7 @@
         "price": 20,
         "color": "blue",
         "description": "lorem",
-        "imageSrc":"./assets/galaxya03.webp"
+        "imageSrc": "./assets/galaxya03.webp"
     },
     {
         "id": 3,
@@ -21,6 +21,6 @@
         "price": 30,
         "color": "green",
         "description": "lorem",
-        "imageSrc":"./assets/redmi9c.webp"
+        "imageSrc": "./assets/redmi9c.webp"
     }
 ]

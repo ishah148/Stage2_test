@@ -9,8 +9,9 @@ class ProductService implements IProductService {
     private renderProductsCb: () => void;
     constructor(renderProductsCb: () => void) {
         this.renderProductsCb = renderProductsCb;
-        // this.getProducts(null);
         this.init();
+        // this.getProducts(null);
+        // this.init();
     }
 
     async getProducts(filter: IFilter | null): Promise<IProduct[]> {
@@ -28,11 +29,14 @@ class ProductService implements IProductService {
     }
 
     getActualProducts() {
-        this.renderProducts();
+        console.log(this.filteredData);
+        // this.renderProducts();
         return this.filteredData;
     }
     renderProducts(): void {
         // console.log(this.renderProductsCb);
+        this.renderProductsCb();
+        this.renderProductsCb();
         this.renderProductsCb();
     }
 }

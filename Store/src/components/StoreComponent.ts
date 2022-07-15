@@ -10,21 +10,11 @@ export class StoreComponent implements IComponent {
     private service: ProductService;
     private products: ProductsComponent;
     constructor() {
-        this.products = new ProductsComponent();
-        // this.service = new ProductService(() => this.products.render(() => this.service.getActualProducts()));
-        // this.products = new ProductsComponent(callback);
         this.service = new ProductService(() => {
-            return this.products.test();
+            return this.products.render();
         });
-        //! this.service = new ProductService(() => {
-        //!     return this.products.render(??????);
-        //! });
-        // this.service = new ProductService(() => {
-        //     return this.products.render.bind(this.products);
-        // });
+        this.products = new ProductsComponent(() => this.service.getActualProducts());
         this.load();
-        // this.getActualProducts();
-        // this.productCards = new CartComponent();
     }
 
     render(): void {
@@ -37,8 +27,6 @@ export class StoreComponent implements IComponent {
         this.init();
         const data = await this.service.getProducts(null);
         this.isLoaded = true;
-        // this.products.render(this.service.getActualProducts.bind(this.service));
-        this.products.render(() => this.service.getActualProducts());
         this.service.renderProducts();
     }
 

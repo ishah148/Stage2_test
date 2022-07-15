@@ -3,8 +3,10 @@ import { IComponent, IProduct } from '../types/types';
 export class ProductsComponent implements IComponent {
     wrapper: HTMLElement;
     productsData: IProduct[] | null;
+    public getActualProductsCb: () => IProduct[];
     // callback: Callback<T>;
-    constructor() {
+    constructor(getActualProductsCb: () => IProduct[]) {
+        this.getActualProductsCb = getActualProductsCb;
         this.init();
         this.wrapper = <HTMLElement>document.querySelector('.product-card__wrapper');
         this.productsData = null;
@@ -15,11 +17,15 @@ export class ProductsComponent implements IComponent {
         // this.wrapper = document.getElementById('ProductsComponent')
     }
 
-    render(callback: () => IProduct[]) {
+    render(): void {
         console.log('ProductsComponent');
-        callback().forEach((data: IProduct) => {
+        this.getActualProducts().forEach((data: IProduct) => {
             return this.wrapper.insertAdjacentHTML('beforeend', this.getHTML(data));
         });
+    }
+
+    getActualProducts(): IProduct[] {
+        return this.getActualProductsCb();
     }
 
     test() {
@@ -61,9 +67,9 @@ export class ProductsComponent implements IComponent {
             <img src="${obj.imageSrc}" class="card-img-top" alt="...">
             <div class="product-card__body  card-body">
                 <h6 class="product-card__name card-title">${obj.name}</h6>
-                <div class="container d-flex justify-content-between align-items-center">
+                <div class="product-card__price-and-color container d-flex justify-content-between align-items-center">
                     <h6 class="product-card__price card-title">${obj.price}</h6>
-                    <div class="product-card__color" style="backgound="${obj.color}"></div>
+                    <div class="product-card__color" style="background: ${obj.color}"></div>
                 </div>
                 <p class="card-text">${obj.description}</p>
                 <button class="product-card__add-to-cart btn btn-primary">Add ro cart 
