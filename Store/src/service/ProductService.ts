@@ -16,7 +16,7 @@ class ProductService implements IProductService {
 
     async getProducts(filter: IFilter | null): Promise<IProduct[]> {
         if (!filter) {
-            console.log('!filter');
+            // console.log('!filter');
         }
         // const responce = await fetch('../Store/src/components/products_data/product.json');
         const responce = await fetch(this.url);
@@ -36,8 +36,12 @@ class ProductService implements IProductService {
     renderProducts(): void {
         // console.log(this.renderProductsCb);
         this.renderProductsCb();
-        this.renderProductsCb();
-        this.renderProductsCb();
+    }
+    searchProducts(query: string) {
+        console.log('searchProductsService', query);
+        this.filteredData = this.filteredData.filter((i) => i.name.includes(query));
+        this.renderProducts();
+        console.log(this.filteredData);
     }
 }
 

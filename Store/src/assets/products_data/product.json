@@ -22,5 +22,13 @@
         "color": "green",
         "description": "lorem",
         "imageSrc": "./assets/redmi9c.webp"
+    },
+    {
+        "id": 4,
+        "name": "iPhone11",
+        "price": 30,
+        "color": "white",
+        "description": "lorem",
+        "imageSrc": "./assets/iphone11.webp"
     }
 ]

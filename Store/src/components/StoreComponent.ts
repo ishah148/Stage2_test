@@ -2,6 +2,7 @@ import ProductService from '../service/ProductService';
 import { IProductService, IComponent, ICart, IProduct } from '../types/types';
 import { CartComponent } from './cart';
 import { ProductsComponent } from './ProductsComponent';
+import SearchComponent from './SearchComponent';
 
 export class StoreComponent implements IComponent {
     // constructor() {}
@@ -9,25 +10,29 @@ export class StoreComponent implements IComponent {
     private isLoaded = false;
     private service: ProductService;
     private products: ProductsComponent;
+    search!: SearchComponent;
     constructor() {
         this.service = new ProductService(() => {
             return this.products.render();
         });
         this.products = new ProductsComponent(() => this.service.getActualProducts());
         this.load();
+        this.render();
     }
 
-    render(): void {
-        console.log(123);
-    }
-    init(): void {
-        console.log('init');
-    }
     async load() {
         this.init();
         const data = await this.service.getProducts(null);
         this.isLoaded = true;
         this.service.renderProducts();
+    }
+    render(): void {
+        // console.log('render');
+        const callback = this.service.searchProducts.bind(this.service);
+        this.search = new SearchComponent(callback);
+    }
+    init(): void {
+        // console.log('init');
     }
 
     test() {

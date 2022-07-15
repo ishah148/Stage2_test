@@ -19,6 +19,7 @@ export class ProductsComponent implements IComponent {
 
     render(): void {
         console.log('ProductsComponent');
+        this.clearProducts();
         this.getActualProducts().forEach((data: IProduct) => {
             return this.wrapper.insertAdjacentHTML('beforeend', this.getHTML(data));
         });
@@ -26,6 +27,10 @@ export class ProductsComponent implements IComponent {
 
     getActualProducts(): IProduct[] {
         return this.getActualProductsCb();
+    }
+
+    clearProducts(): void {
+        this.wrapper.querySelectorAll('.product-card').forEach((i) => i.remove());
     }
 
     test() {
