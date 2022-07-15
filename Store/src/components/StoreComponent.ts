@@ -28,8 +28,8 @@ export class StoreComponent implements IComponent {
     }
     render(): void {
         // console.log('render');
-        const callback = this.service.searchProducts.bind(this.service);
-        this.search = new SearchComponent(callback);
+        // const callback = this.service.searchProducts.bind(this.service);
+        this.search = new SearchComponent(this.service.searchProducts.bind(this.service));
     }
     init(): void {
         // console.log('init');

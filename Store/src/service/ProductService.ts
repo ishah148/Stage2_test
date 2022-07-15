@@ -10,17 +10,15 @@ class ProductService implements IProductService {
     constructor(renderProductsCb: () => void) {
         this.renderProductsCb = renderProductsCb;
         this.init();
-        // this.getProducts(null);
-        // this.init();
     }
 
     async getProducts(filter: IFilter | null): Promise<IProduct[]> {
         if (!filter) {
             // console.log('!filter');
         }
-        // const responce = await fetch('../Store/src/components/products_data/product.json');
         const responce = await fetch(this.url);
         const data = await responce.json();
+        this.data = data;
         return data;
     }
 
@@ -33,15 +31,20 @@ class ProductService implements IProductService {
         // this.renderProducts();
         return this.filteredData;
     }
+
     renderProducts(): void {
-        // console.log(this.renderProductsCb);
         this.renderProductsCb();
     }
+
     searchProducts(query: string) {
-        console.log('searchProductsService', query);
+        // console.log('searchProductsService query = ', query);
         this.filteredData = this.filteredData.filter((i) => i.name.includes(query));
+        if (!query) {
+            this.filteredData = this.data;
+        }
         this.renderProducts();
-        console.log(this.filteredData);
+        // console.log(this.filteredData);
+        // console.log('this.data', this.data);
     }
 }
 
