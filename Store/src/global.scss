@@ -14,14 +14,28 @@ main {
     // height: 500px;
 }
 
+.filters-menu {
+    .filters-menu__reset {
+    }
+    .filters-menu__body {
+        .filters-menu__nouislider {
+            height: 100px;
+            padding: 40px 10px;
+            .noUi-connects{
+                background: var(--bs-gray-400);
+            }
+        }
+    }
+}
+
 .sort__container {
     height: 40px;
     margin-right: 20px;
-    .sort__input{  
+    .sort__input {
         // height: 15px;
     }
 
-    .sort__item-svg{
+    .sort__item-svg {
         width: 18px;
         height: 18px;
     }
