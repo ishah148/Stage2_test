@@ -28,13 +28,13 @@ class SearchComponent implements IComponent {
     }
     test(e: Event) {
         // console.log(e);
-        const filterData: string = (e.target as HTMLInputElement).value;
-        // console.log(filterData);
-        this.searchServiceCb(filterData);
+        const searchQuery: string = (e.target as HTMLInputElement).value;
+        // console.log(searchQuery);
+        this.searchServiceCb(searchQuery);
     }
     initEvents(): void {
-        console.log('bar', this.searchBar);
-        console.log('input', this.searchBarInput);
+        //console.log('bar', this.searchBar);
+        //console.log('input', this.searchBarInput);
         this.searchBarInput.onchange = (e) => this.test(e);
     }
 }

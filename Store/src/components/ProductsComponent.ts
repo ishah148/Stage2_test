@@ -3,69 +3,30 @@ import { IComponent, IProduct } from '../types/types';
 export class ProductsComponent implements IComponent {
     wrapper: HTMLElement;
     productsData: IProduct[] | null;
-    public getActualProductsCb: () => IProduct[];
-    // callback: Callback<T>;
-    constructor(getActualProductsCb: () => IProduct[]) {
-        this.getActualProductsCb = getActualProductsCb;
-        this.init();
+    constructor() {
         this.wrapper = <HTMLElement>document.querySelector('.product-card__wrapper');
         this.productsData = null;
-        // this.callback;
     }
 
-    init() {
-        // this.wrapper = document.getElementById('ProductsComponent')
-    }
-
-    render(): void {
-        console.log('ProductsComponent');
+    render(data: IProduct[] | null): void {
         this.clearProducts();
-        this.getActualProducts().forEach((data: IProduct) => {
+        data?.forEach((data: IProduct) => {
             return this.wrapper.insertAdjacentHTML('beforeend', this.getHTML(data));
         });
     }
 
-    getActualProducts(): IProduct[] {
-        return this.getActualProductsCb();
-    }
+    // getActualProducts(): IProduct[] {
+    //     return this.getActualProductsCb();
+    // }
 
     clearProducts(): void {
         this.wrapper.querySelectorAll('.product-card').forEach((i) => i.remove());
     }
 
     test() {
-        console.log('ProductsComponent test');
-    }
-    // render() {
-    //     console.log('ProductsComponent');
-    //     this.getData().forEach((data: IProduct) => {
-    //         return this.wrapper.insertAdjacentHTML('beforeend', this.getHTML(data));
-    //     });
-    // }
-
-    // getData(callback: () => IProduct[]): IProduct[] {
-    //     // return callback();
-    // }
-
-    recieveCallback<T>(cb: T) {
-        // return cb;
-        // this.callbackFilteredData = cb;
+        //!console.log('ProductsComponent test');
     }
 
-    // render(callback: Callback<T>) {
-    //     console.log('ProductsComponent');
-    //     callback(/*IProduct[]*/).forEach(data => {
-    //         this.wrapper.insertAdjacentHTML('beforeend', this.getHTML(data))
-    //     });
-    // }
-
-    // render(data): void {
-    //     if(isHaveCards()){
-    //         removeAll()
-    //     }
-    //     this.wrapper.insertAdjacentHTML('',html)
-    //     // this.cart.getAllItems(); // TODO draw each item
-    // }
     getHTML(obj: IProduct): string {
         return `
         <div class="product-card card">
@@ -90,4 +51,5 @@ export class ProductsComponent implements IComponent {
     }
 }
 
-// export class ProductCard extends ProductsComponent{}
+// this.getActualProductsCb = getActualProductsCb;
+// public getActualProductsCb: () => IProduct[];

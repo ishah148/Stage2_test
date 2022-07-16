@@ -2,25 +2,31 @@ export interface IProduct {
     id: number;
     name: string;
     price: number;
+    vendor: string;
     color: string;
     description: string;
     imageSrc: string;
 }
 
 export interface IFilter {
-    query: string;
+    colors: string[];
+    vendors: string[];
     priceFrom: number;
     priceTo: number;
 }
 
 export interface IProductService {
-    getProducts(filter: IFilter | null): Promise<IProduct[]>;
+    getProductsData(filter: IFilter | null): Promise<IProduct[]>;
 }
 
+export type Callbacks = {
+    renderProducts?: (data: IProduct[] | null) => void;
+    renderCart?: (data: IProduct[] | null) => void;
+};
 // export type Callback<T> = (data: T) => IProduct[];
 
 export interface IComponent {
-    render(callback: () => IProduct[]): void;
+    render(data: IProduct[] | null): void;
 }
 // export interface IComponent<T> {
 //     render(callback: Callback<T>): void;
