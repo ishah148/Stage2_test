@@ -3,16 +3,44 @@
 
 header {
     display: flex;
-    .search-bar{
+    .search-bar {
         width: 100%;
     }
-    button{
+    button {
         height: 38px;
     }
 }
 main {
     // height: 500px;
 }
+
+.sort__container {
+    height: 40px;
+    margin-right: 20px;
+    .sort__input{  
+        // height: 15px;
+    }
+
+    .sort__item-svg{
+        width: 18px;
+        height: 18px;
+    }
+
+    .sort__item {
+    }
+}
+// .sort__container {
+//     .sort__button {
+//     }
+//     .sort__menu {
+//         min-width: unset;
+//         margin-top: 3px;
+//         width: 94px;
+//     }
+//     .sort__item {
+//     }
+// }
+
 .product-card__wrapper {
     display: grid;
     grid-template-rows: auto;
@@ -58,7 +86,7 @@ main {
                 height: 30px;
                 border-radius: 10px;
                 background: red;
-                border:  1px solid rgba(0, 0, 0, 0.188);
+                border: 1px solid rgba(0, 0, 0, 0.188);
             }
         }
         .product-card__add-to-cart {
