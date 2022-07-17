@@ -22,6 +22,9 @@ class ProductService implements IProductService {
         return data;
     }
 
+    get productsData(): IProduct[] {
+        return this.data;
+    }
     // async init() {
     //     this.filteredData = await this.getProductsData(null);
     // }
@@ -32,9 +35,11 @@ class ProductService implements IProductService {
     }
 
     searchProducts(query: string) {
-        let searchedData = this.filteredData.filter((i) => i.name.includes(query.toLowerCase()));
+        // let searchedData = this.filteredData.filter((i) => i.name.includes(query.toLowerCase()));
+        let searchedData = this.data.filter((i) => i.name.toLowerCase().includes(query.toLowerCase()));
         if (!query) {
-            searchedData = this.filteredData;
+            // searchedData = this.filteredData;
+            searchedData = this.data;
         }
         console.log(searchedData);
         this.renderProducts(searchedData);
@@ -46,7 +51,7 @@ class ProductService implements IProductService {
     getCardsCb(renderCartCb: (data: IProduct[] | null) => void) {
         this.callbacks.renderCart = renderCartCb;
     }
-    
+
     renderProducts(data: IProduct[] | null): void {
         if (this.callbacks.renderProducts) {
             this.callbacks.renderProducts(data);

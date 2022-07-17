@@ -23,6 +23,11 @@ export type Callbacks = {
     renderProducts?: (data: IProduct[] | null) => void;
     renderCart?: (data: IProduct[] | null) => void;
 };
+
+export type FilterComponents = {
+    [key: string]: HTMLElement | string;
+};
+// Object<string>
 // export type Callback<T> = (data: T) => IProduct[];
 
 export interface IComponent {

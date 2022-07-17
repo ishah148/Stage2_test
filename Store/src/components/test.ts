@@ -216,3 +216,89 @@
 //         // this.cart.getAllItems(); // TODO draw each item
 //     }
 // }
+
+// <div class="filters-menu offcanvas offcanvas-start d-none" tabindex="-1" id="offcanvasExample"
+//             aria-labelledby="offcanvasExampleLabel">
+//             <div class="offcanvas-header">
+//                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filters</h5>
+//                 <button type="button" id="filters-menu__reset"
+//                     class="filters-menu__reset btn btn-secondary">Reset</button>
+//                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+//                     aria-label="Close"></button>
+//             </div>
+//             <div class="filters-menu__body offcanvas-body">
+//                 <h6 class="text-center">Goods in stock</h6>
+//                 <div id="sliderServe" class="filters-menu__nouislider"></div>
+//                 <h6 class="text-center">Price</h6>
+//                 <div id="sliderYear" class="filters-menu__nouislider"></div>
+
+//                 <!-- filter company -->
+//                 <button class="filters-menu__button-open btn btn-primary" type="button" data-bs-toggle="collapse"
+//                     data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+//                     Developer
+//                 </button>
+//                 <div class="filters-menu__group collapse" id="collapseExample1" data-filter="company-contaner">
+//                     <div class="filters-menu__checkbox form-check">
+//                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" data-filter="company">
+//                         <label class="form-check-label" for="flexCheckDefault1">
+//                             Iphone
+//                         </label>
+//                     </div>
+//                 </div>
+
+//                 <!-- filter color -->
+//                 <button class="filters-menu__button-open btn btn-primary" type="button" data-bs-toggle="collapse"
+//                     data-bs-target="#collapseExample11" aria-expanded="false" aria-controls="collapseExample">
+//                     Color
+//                 </button>
+//                 <div class="filters-menu__group collapse" id="collapseExample11" data-filter="color-contaner">
+//                     <div class="filters-menu__checkbox form-check">
+//                         выблядок ты где был??????
+//                         у тебя за щекой спрятался
+//                         псина
+
+//                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" data-filter="color">
+//                         <label class="form-check-label" for="flexCheckDefault1">
+//                             Red
+//                         </label>
+//                     </div>
+//                 </div>
+
+//                 <!-- filter camera resolution -->
+//                 <button class="filters-menu__button-open btn btn-primary" type="button" data-bs-toggle="collapse"
+//                     data-bs-target="#collapseExample111" aria-expanded="false" aria-controls="collapseExample" >
+//                     Camera resolution
+//                 </button>
+//                 <div class="filters-menu__group collapse" id="collapseExample111" data-filter="resolution-contaner">
+
+//                     <div class="filters-menu__checkbox form-check">
+//                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault111" data-filter="resolution">
+//                         <label class="form-check-label" for="flexCheckDefault111">
+//                             12 MP
+//                         </label>
+//                     </div>
+
+//                 </div>
+
+//             </div>
+//         </div>
+
+// <div class="product-card card">
+// <img src="assets/galaxya023.webp" class="card-img-top" alt="...">
+// <div class="product-card__body  card-body">
+//     <h6 class="product-card__name card-title">Redmi Note 7</h6>
+//     <div
+//         class="product-card__price-and-color container d-flex justify-content-between align-items-center">
+//         <h6 class="product-card__price card-title">120$</h6>
+//         <div class="product-card__color"></div>
+//     </div>
+//     <p class="card-text">Some quick example text .</p>
+//     <button type="button" class="product-card__add-to-cart btn btn-primary" data-bs-container="body"
+//         data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Top popover">Add ro cart <svg
+//             xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+//             class="bi bi-cart3" viewBox="0 0 16 16">
+//             <path
+//                 d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+//         </svg></button>
+// </div>
+// </div>

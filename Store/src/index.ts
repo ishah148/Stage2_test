@@ -17,10 +17,10 @@ const sliderYear: noUiSlider.target = document.getElementById('sliderYear') as t
 console.log(sliderServe);
 
 noUiSlider.create(sliderServe, {
-    start: [0, 20],
+    start: [1, 20],
     connect: true,
     range: {
-        min: 0,
+        min: 1,
         max: 20,
     },
     format: {
@@ -47,10 +47,10 @@ noUiSlider.create(sliderServe, {
     );
 });
 noUiSlider.create(sliderYear, {
-    start: [0, 1000],
+    start: [1, 1000],
     connect: true,
     range: {
-        min: 0,
+        min: 1,
         max: 1000,
     },
     format: {

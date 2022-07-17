@@ -5,7 +5,8 @@
         "price": 10,
         "color": "red",
         "description": "lorem",
-        "imageSrc": "./assets/redmi9c.webp"
+        "imageSrc": "./assets/redmi9c.webp",
+        "company":"xiaomi"
     },
     {
         "id": 2,
