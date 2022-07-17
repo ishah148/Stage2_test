@@ -46,7 +46,7 @@ class FilterComponent implements IComponent {
     setProductsData(data: IProduct[]) {
         this.data = data;
         this.renderCheckboxes();
-        // this.hanldeEvents();
+        this.hanldeEvents();
     }
 
     hanldeEvents() {
@@ -71,12 +71,12 @@ class FilterComponent implements IComponent {
             yearTo: 0,
         };
         this.selectors.container.querySelectorAll('input').forEach((i) => {
-            const value = i.dataset.filter;
+            const value = i.dataset.value;
             const name = i.dataset.filter;
+            console.log(value);
+            console.log(name);
             console.log(i.checked);
-            console.log(value);
             (filterQuery[`${name as keyof typeof filterQuery}`] as string[]).push(value as string);
-            console.log(value);
         });
         console.log('filterQuery', filterQuery);
     }
@@ -94,10 +94,10 @@ class FilterComponent implements IComponent {
         const HTML: Array<string> = [];
         data.forEach((obj) => {
             const rand = this.randomInteger(1, 2000);
-            HTML.push(`<input class= "form-check-input" type = "checkbox" value = "" id = "id-${rand}" data - filter="${type}" data - value="${
+            HTML.push(`<input class= "form-check-input" type ="checkbox" value ="" id = "id-${rand}" data-filter="${type}" data-value="${
                 obj[`${type as keyof typeof obj}`]
             }" >
-        <label class="form-check-label" for= "id-${rand}" > ${obj[`${type as keyof typeof obj}`]} </label><br>`);
+        <label class="form-check-label" for="id-${rand}"> ${obj[`${type as keyof typeof obj}`]} </label><br>`);
         });
         const uniqHTML = new Set(HTML);
 
