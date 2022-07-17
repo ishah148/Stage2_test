@@ -56,6 +56,17 @@ class FilterComponent implements IComponent {
                 this.createQuery();
             });
         });
+        this.selectors.resetFiltersBtn.onclick = () => this.resetFilters();
+    }
+
+    resetFilters() {
+        this.selectors.container.querySelectorAll('input').forEach((i) => {
+            const value = i.dataset.value;
+            const name = i.dataset.filter;
+            i.checked = false;
+        });
+        (this.sliderYear.noUiSlider as noUiSlider.API).reset();
+        (this.sliderPrice.noUiSlider as noUiSlider.API).reset();
     }
 
     // sendQuery() {
@@ -239,22 +250,3 @@ class FilterComponent implements IComponent {
     }
 }
 export default FilterComponent;
-
-// (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
-//     console.log(
-//         value.map((i) => {
-//             if (typeof i === 'string') {
-//                 return +i.slice(0, 4);
-//             }
-//         })
-//     );
-// });
-// (this.sliderPrice.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
-//     console.log(
-//         value.map((i) => {
-//             if (typeof i === 'string') {
-//                 return +i.slice(0, 4);
-//             }
-//         })
-//     );
-// });
