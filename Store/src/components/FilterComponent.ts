@@ -22,8 +22,8 @@ class FilterComponent implements IComponent {
     selectors!: Selectors;
     constructor() {
         this.createComponents();
-        this
         this.render();
+        this.createSelectors();
     }
     render(): void {
         this.components.wrapper.insertAdjacentHTML('beforeend', this.components.container);
@@ -93,6 +93,10 @@ class FilterComponent implements IComponent {
     createSelectors() {
         this.selectors = {
             container: this.components.wrapper.querySelector('.filters-menu') as HTMLElement,
+            resetFiltersBtn: document.getElementById('filters-menu__reset') as HTMLElement,
+            filterCompany: document.getElementById('filterCompany') as HTMLElement,
+            filterColor: document.getElementById('filterColor') as HTMLElement,
+            filterResolution: document.getElementById('filterResolution') as HTMLElement,
         };
     }
     getHTML(): string {
