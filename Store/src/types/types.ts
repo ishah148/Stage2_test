@@ -6,13 +6,19 @@ export interface IProduct {
     color: string;
     description: string;
     imageSrc: string;
+    camResolution: string;
+    year: number;
+    onStorage: number;
 }
 
 export interface IFilter {
     colors: string[];
-    vendors: string[];
+    company: string[];
+    camResolution: string[];
     priceFrom: number;
     priceTo: number;
+    yearFrom: number;
+    yearTo: number;
 }
 
 export interface IProductService {

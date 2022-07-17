@@ -6,7 +6,10 @@
         "color": "red",
         "description": "lorem",
         "imageSrc": "./assets/redmi9c.webp",
-        "company": "xiaomi"
+        "company": "xiaomi",
+        "camResolution":"12 Mp",
+        "year":2020,
+        "onStorage":10
     },
     {
         "id": 2,
@@ -15,7 +18,10 @@
         "color": "blue",
         "description": "lorem",
         "imageSrc": "./assets/galaxya03.webp",
-        "company": "xiaomi"
+        "company": "apple",
+        "camResolution":"13 Mp",
+        "year":2020,
+        "onStorage":10
     },
     {
         "id": 3,
@@ -24,7 +30,10 @@
         "color": "green",
         "description": "lorem",
         "imageSrc": "./assets/redmi9c.webp",
-        "company": "xiaomi"
+        "company": "xiaomi",
+        "camResolution":"64 Mp",
+        "year":2020,
+        "onStorage":10
     },
     {
         "id": 4,
@@ -33,6 +42,9 @@
         "color": "white",
         "description": "lorem",
         "imageSrc": "./assets/iphone11.webp",
-        "company": "xiaomi"
+        "company": "nokia",
+        "camResolution":"12 Mp",
+        "year":2020,
+        "onStorage":10
     }
 ]

@@ -13,7 +13,7 @@ export class Filter {
         const resultArr: IProduct[] = [];
         for (const item of this.data) {
             if (this.filterObj.colors && !this.filterObj.colors.includes(item.color)) continue;
-            if (this.filterObj.vendors && !this.filterObj.vendors.includes(item.company)) continue;
+            if (this.filterObj.company && !this.filterObj.company.includes(item.company)) continue;
             if (this.filterObj.priceFrom && this.filterObj.priceFrom >= item.price) continue;
             if (this.filterObj.priceTo && this.filterObj.priceTo <= item.price) continue;
             resultArr.push(item);
