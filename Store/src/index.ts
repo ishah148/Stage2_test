@@ -12,10 +12,41 @@ import 'nouislider/dist/nouislider.css';
 import 'bootstrap';
 import wNumb from 'wnumb';
 // const range = document.getElementById('range') as target;
-const slider1: noUiSlider.target = document.getElementById('nouislider1') as target;
-console.log(slider1);
+const sliderServe: noUiSlider.target = document.getElementById('sliderServe') as target;
+const sliderYear: noUiSlider.target = document.getElementById('sliderYear') as target;
+console.log(sliderServe);
 
-noUiSlider.create(slider1, {
+noUiSlider.create(sliderServe, {
+    start: [0, 20],
+    connect: true,
+    range: {
+        min: 0,
+        max: 20,
+    },
+    format: {
+        to: function (value) {
+            return value + ',-';
+        },
+        from: function (value) {
+            return Number(value.replace(',-', ''));
+        },
+    },
+    tooltips: [
+        wNumb({ decimals: 0 }), // tooltip with custom formatting
+        wNumb({ decimals: 0 }), // tooltip with default formatting
+    ],
+});
+
+(sliderServe.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
+    console.log(
+        value.map((i) => {
+            if (typeof i === 'string') {
+                return +i.slice(0, 4);
+            }
+        })
+    );
+});
+noUiSlider.create(sliderYear, {
     start: [0, 1000],
     connect: true,
     range: {
@@ -36,7 +67,7 @@ noUiSlider.create(slider1, {
     ],
 });
 
-(slider1.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
+(sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
     console.log(
         value.map((i) => {
             if (typeof i === 'string') {
