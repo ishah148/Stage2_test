@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { IComponent, IFilter, IProduct } from '../types/types';
 import * as noUiSlider from 'nouislider';
 import { target } from 'nouislider';
@@ -51,14 +50,16 @@ class FilterComponent implements IComponent {
     }
 
     hanldeEvents() {
-        this.selectors.container.querySelectorAll('input').forEach(el => {
-            el.addEventListener('change', () => { this.createQuery() }/**send new filter */);
+        this.selectors.container.querySelectorAll('input').forEach((el) => {
+            el.addEventListener('change', () => {
+                this.createQuery();
+            });
         });
     }
 
-    sendQuery() {
-        ;
-    }
+    // sendQuery() {
+    //     '';
+    // }
     createQuery() {
         const filterQuery: IFilter = {
             colors: [],
@@ -68,30 +69,35 @@ class FilterComponent implements IComponent {
             priceTo: 1000,
             yearFrom: 0,
             yearTo: 0,
-        }
-        this.selectors.container.querySelectorAll('input').forEach(i => {
-            const value = i.dataset.filter
-            const name = i.dataset.filter
+        };
+        this.selectors.container.querySelectorAll('input').forEach((i) => {
+            const value = i.dataset.filter;
+            const name = i.dataset.filter;
             console.log(i.checked);
             console.log(value);
-            (filterQuery[`${name as keyof typeof filterQuery}`] as string[]).push(value as string)
+            (filterQuery[`${name as keyof typeof filterQuery}`] as string[]).push(value as string);
             console.log(value);
-        })
-        console.log("filterQuery",filterQuery)
+        });
+        console.log('filterQuery', filterQuery);
     }
 
     renderCheckboxes() {
         this.selectors.filterCompany.insertAdjacentHTML('beforeend', this.getCheckboxHTML(this.data, 'company'));
         this.selectors.filterColor.insertAdjacentHTML('beforeend', this.getCheckboxHTML(this.data, 'color'));
-        this.selectors.filterResolution.insertAdjacentHTML('beforeend', this.getCheckboxHTML(this.data, 'camResolution'));
+        this.selectors.filterResolution.insertAdjacentHTML(
+            'beforeend',
+            this.getCheckboxHTML(this.data, 'camResolution')
+        );
     }
 
     getCheckboxHTML(data: IProduct[], type: string): string {
         const HTML: Array<string> = [];
         data.forEach((obj) => {
-            const rand = this.randomInteger(1, 2000)
-            HTML.push(`< input class= "form-check-input" type = "checkbox" value = "" id = "id-${rand}" data - filter="${type}" data - value="${obj[`${type as keyof typeof obj}`]}" >
-        <label class="form-check-label" for= "id-${rand}" > ${obj[`${type as keyof typeof obj}`]} < /label><br>`)
+            const rand = this.randomInteger(1, 2000);
+            HTML.push(`<input class= "form-check-input" type = "checkbox" value = "" id = "id-${rand}" data - filter="${type}" data - value="${
+                obj[`${type as keyof typeof obj}`]
+            }" >
+        <label class="form-check-label" for= "id-${rand}" > ${obj[`${type as keyof typeof obj}`]} </label><br>`);
         });
         const uniqHTML = new Set(HTML);
 
@@ -154,7 +160,6 @@ class FilterComponent implements IComponent {
     }
 
     createNoUiSlider() {
-
         this.sliderServe = document.getElementById('sliderServe') as target;
         this.sliderYear = document.getElementById('sliderYear') as target;
 
