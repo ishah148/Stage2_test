@@ -26,11 +26,12 @@ export class StoreComponent {
         this.filter = new FilterComponent();
     }
 
-    sendCallbaks() {
+    async sendCallbaks() {
         this.search = new SearchComponent(this.service.searchProducts.bind(this.service));
         this.service.getProductsCb(this.products.render.bind(this.products));
         this.service.getCardsCb(this.cart.render.bind(this.cart));
-        this.filter.setProductsData(this.service.productsData);
+        const dataD = await this.service.productsData;
+        this.filter.setProductsData(dataD);
     }
 
     async load() {

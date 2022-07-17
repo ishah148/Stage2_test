@@ -24,6 +24,8 @@ class FilterComponent implements IComponent {
         this.createComponents();
         this.render();
         this.createSelectors();
+        console.dir(this);
+        // this.data = data;
     }
     render(): void {
         this.components.wrapper.insertAdjacentHTML('beforeend', this.components.container);
@@ -106,7 +108,6 @@ class FilterComponent implements IComponent {
     createNoUiSlider() {
         const sliderServe: noUiSlider.target = document.getElementById('sliderServe') as target;
         const sliderYear: noUiSlider.target = document.getElementById('sliderYear') as target;
-        console.log(sliderServe);
 
         noUiSlider.create(sliderServe, {
             start: [1, 20],

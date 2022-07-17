@@ -22,8 +22,8 @@ class ProductService implements IProductService {
         return data;
     }
 
-    get productsData(): IProduct[] {
-        return this.data;
+    get productsData(): Promise<IProduct[]> {
+        return this.getProductsData(null);
     }
     // async init() {
     //     this.filteredData = await this.getProductsData(null);

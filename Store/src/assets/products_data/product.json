@@ -6,7 +6,7 @@
         "color": "red",
         "description": "lorem",
         "imageSrc": "./assets/redmi9c.webp",
-        "company":"xiaomi"
+        "company": "xiaomi"
     },
     {
         "id": 2,
@@ -14,7 +14,8 @@
         "price": 20,
         "color": "blue",
         "description": "lorem",
-        "imageSrc": "./assets/galaxya03.webp"
+        "imageSrc": "./assets/galaxya03.webp",
+        "company": "xiaomi"
     },
     {
         "id": 3,
@@ -22,7 +23,8 @@
         "price": 30,
         "color": "green",
         "description": "lorem",
-        "imageSrc": "./assets/redmi9c.webp"
+        "imageSrc": "./assets/redmi9c.webp",
+        "company": "xiaomi"
     },
     {
         "id": 4,
@@ -30,102 +32,7 @@
         "price": 30,
         "color": "white",
         "description": "lorem",
-        "imageSrc": "./assets/iphone11.webp"
-    },
-    {
-        "id": 1,
-        "name": "redmi 9c",
-        "price": 10,
-        "color": "red",
-        "description": "lorem",
-        "imageSrc": "./assets/redmi9c.webp"
-    },
-    {
-        "id": 2,
-        "name": "good2",
-        "price": 20,
-        "color": "blue",
-        "description": "lorem",
-        "imageSrc": "./assets/galaxya03.webp"
-    },
-    {
-        "id": 3,
-        "name": "good3",
-        "price": 30,
-        "color": "green",
-        "description": "lorem",
-        "imageSrc": "./assets/redmi9c.webp"
-    },
-    {
-        "id": 4,
-        "name": "iPhone11",
-        "price": 30,
-        "color": "white",
-        "description": "lorem",
-        "imageSrc": "./assets/iphone11.webp"
-    },
-    {
-        "id": 1,
-        "name": "redmi 9c",
-        "price": 10,
-        "color": "red",
-        "description": "lorem",
-        "imageSrc": "./assets/redmi9c.webp"
-    },
-    {
-        "id": 2,
-        "name": "good2",
-        "price": 20,
-        "color": "blue",
-        "description": "lorem",
-        "imageSrc": "./assets/galaxya03.webp"
-    },
-    {
-        "id": 3,
-        "name": "good3",
-        "price": 30,
-        "color": "green",
-        "description": "lorem",
-        "imageSrc": "./assets/redmi9c.webp"
-    },
-    {
-        "id": 4,
-        "name": "iPhone11",
-        "price": 30,
-        "color": "white",
-        "description": "lorem",
-        "imageSrc": "./assets/iphone11.webp"
-    },
-    {
-        "id": 1,
-        "name": "redmi 9c",
-        "price": 10,
-        "color": "red",
-        "description": "lorem",
-        "imageSrc": "./assets/redmi9c.webp"
-    },
-    {
-        "id": 2,
-        "name": "good2",
-        "price": 20,
-        "color": "blue",
-        "description": "lorem",
-        "imageSrc": "./assets/galaxya03.webp"
-    },
-    {
-        "id": 3,
-        "name": "good3",
-        "price": 30,
-        "color": "green",
-        "description": "lorem",
-        "imageSrc": "./assets/redmi9c.webp"
-    },
-    {
-        "id": 4,
-        "name": "iPhone11",
-        "price": 30,
-        "color": "white",
-        "description": "lorem",
-        "imageSrc": "./assets/iphone11.webp"
+        "imageSrc": "./assets/iphone11.webp",
+        "company": "xiaomi"
     }
 ]

@@ -2,7 +2,7 @@ export interface IProduct {
     id: number;
     name: string;
     price: number;
-    vendor: string;
+    company: string;
     color: string;
     description: string;
     imageSrc: string;
