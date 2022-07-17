@@ -12,7 +12,7 @@ export interface IProduct {
 }
 
 export interface IFilter {
-    colors: string[];
+    color: string[];
     company: string[];
     camResolution: string[];
     priceFrom: number;

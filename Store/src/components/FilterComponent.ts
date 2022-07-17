@@ -19,9 +19,10 @@ class FilterComponent implements IComponent {
     private data!: IProduct[];
     private components!: FilterComponents;
     private selectors!: Selectors;
-    private sliderServe!: noUiSlider.target;
+    private sliderPrice!: noUiSlider.target;
     private sliderYear!: noUiSlider.target;
     private filterQuery!: IFilter;
+
     constructor() {
         this.createComponents();
         this.render();
@@ -62,23 +63,37 @@ class FilterComponent implements IComponent {
     // }
     createQuery() {
         const filterQuery: IFilter = {
-            colors: [],
+            color: [],
             company: [],
             camResolution: [],
             priceFrom: 1,
             priceTo: 1000,
-            yearFrom: 0,
-            yearTo: 0,
+            yearFrom: 2010,
+            yearTo: 2022,
         };
         this.selectors.container.querySelectorAll('input').forEach((i) => {
             const value = i.dataset.value;
             const name = i.dataset.filter;
-            console.log(value);
-            console.log(name);
-            console.log(i.checked);
-            (filterQuery[`${name as keyof typeof filterQuery}`] as string[]).push(value as string);
+            if (i.checked) {
+                (filterQuery[`${name as keyof typeof filterQuery}`] as string[]).push(value as string);
+            }
         });
-        console.log('filterQuery', filterQuery);
+        const priceFrom = document.querySelector('#sliderPrice > div > div:nth-child(2) > div > div.noUi-tooltip')
+            ?.textContent;
+        const priceTo = document.querySelector('#sliderPrice > div > div:nth-child(3) > div > div.noUi-tooltip')
+            ?.textContent;
+        const yearFrom = document.querySelector('#sliderYear > div > div:nth-child(2) > div > div.noUi-tooltip')
+            ?.textContent;
+        const yearTo = document.querySelector('#sliderYear > div > div:nth-child(3) > div > div.noUi-tooltip')
+            ?.textContent;
+        console.log(priceFrom, priceTo, yearFrom, yearTo);
+        if (priceFrom && priceTo && yearFrom && yearTo) {
+            filterQuery.priceFrom = parseInt(priceFrom);
+            filterQuery.priceTo = parseInt(priceTo);
+            filterQuery.yearFrom = parseInt(yearFrom);
+            filterQuery.yearTo = parseInt(yearTo);
+        }
+        console.log(filterQuery);
     }
 
     renderCheckboxes() {
@@ -92,15 +107,22 @@ class FilterComponent implements IComponent {
 
     getCheckboxHTML(data: IProduct[], type: string): string {
         const HTML: Array<string> = [];
-        data.forEach((obj) => {
-            const rand = this.randomInteger(1, 2000);
-            HTML.push(`<input class= "form-check-input" type ="checkbox" value ="" id = "id-${rand}" data-filter="${type}" data-value="${
-                obj[`${type as keyof typeof obj}`]
-            }" >
-        <label class="form-check-label" for="id-${rand}"> ${obj[`${type as keyof typeof obj}`]} </label><br>`);
+        const temp: Array<string> = [];
+        data.forEach((i) => {
+            return temp.push(i[`${type as keyof typeof i}`] as string);
         });
-        const uniqHTML = new Set(HTML);
 
+        data.forEach((obj) => {
+            // TODO remove duplicate
+            HTML.push(`<input class= "form-check-input" type ="checkbox" value ="" id = "id-${
+                obj[`${type as keyof typeof obj}`]
+            }" data-filter="${type}" data-value="${obj[`${type as keyof typeof obj}`]}" >
+        <label class="form-check-label" for="id-${obj[`${type as keyof typeof obj}`]}"> ${
+                obj[`${type as keyof typeof obj}`]
+            } </label><br>`);
+        });
+        // console.dir(a);
+        const uniqHTML = new Set(HTML);
         return [...uniqHTML].join('');
     }
 
@@ -120,9 +142,9 @@ class FilterComponent implements IComponent {
             body: `<div class="filters-menu__body offcanvas-body"></div>`,
 
             nouisliders: `
-            <h6 class="text-center">Goods in stock</h6>
-            <div id="sliderServe" class="filters-menu__nouislider"></div>
             <h6 class="text-center">Price</h6>
+            <div id="sliderPrice" class="filters-menu__nouislider"></div>
+            <h6 class="text-center">Year</h6>
             <div id="sliderYear" class="filters-menu__nouislider"></div>`,
             filterCompany: `
             <button class="filters-menu__button-open btn btn-primary" type="button" data-bs-toggle="collapse"
@@ -160,11 +182,12 @@ class FilterComponent implements IComponent {
     }
 
     createNoUiSlider() {
-        this.sliderServe = document.getElementById('sliderServe') as target;
+        this.sliderPrice = document.getElementById('sliderPrice') as target;
         this.sliderYear = document.getElementById('sliderYear') as target;
 
-        noUiSlider.create(this.sliderServe, {
+        noUiSlider.create(this.sliderYear, {
             start: [2010, 2022],
+            step: 1,
             connect: true,
             range: {
                 min: 2010,
@@ -184,8 +207,9 @@ class FilterComponent implements IComponent {
             ],
         });
 
-        noUiSlider.create(this.sliderYear, {
+        noUiSlider.create(this.sliderPrice, {
             start: [1, 1000],
+            step: 10,
             connect: true,
             range: {
                 min: 1,
@@ -204,25 +228,33 @@ class FilterComponent implements IComponent {
                 wNumb({ decimals: 0 }), // tooltip with default formatting
             ],
         });
-
+        // (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => () => console.log(123));
+        // (this.sliderPrice.noUiSlider as noUiSlider.API).on('change', (value, handle) => () => this.createQuery() );
         (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
-            console.log(
-                value.map((i) => {
-                    if (typeof i === 'string') {
-                        return +i.slice(0, 4);
-                    }
-                })
-            );
+            this.createQuery();
         });
-        (this.sliderServe.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
-            console.log(
-                value.map((i) => {
-                    if (typeof i === 'string') {
-                        return +i.slice(0, 2);
-                    }
-                })
-            );
+        (this.sliderPrice.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
+            this.createQuery();
         });
     }
 }
 export default FilterComponent;
+
+// (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
+//     console.log(
+//         value.map((i) => {
+//             if (typeof i === 'string') {
+//                 return +i.slice(0, 4);
+//             }
+//         })
+//     );
+// });
+// (this.sliderPrice.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
+//     console.log(
+//         value.map((i) => {
+//             if (typeof i === 'string') {
+//                 return +i.slice(0, 4);
+//             }
+//         })
+//     );
+// });
