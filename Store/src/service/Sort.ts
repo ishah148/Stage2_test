@@ -6,7 +6,8 @@ export class Sort {
 
     constructor(query: SortQuery, data: IProduct[]) {
         this.query = query;
-        this.data = JSON.parse(JSON.stringify(data));
+        // this.data = JSON.parse(JSON.stringify(data));
+        this.data = data;
         console.log('sort data', data);
     }
 

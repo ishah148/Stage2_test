@@ -88,18 +88,14 @@ main {
 
     .sort__item {
     }
+    .sort-article{
+        color: black;
+        position: absolute;
+        bottom: 22px;
+        left: 23px;
+    }
 }
-// .sort__container {
-//     .sort__button {
-//     }
-//     .sort__menu {
-//         min-width: unset;
-//         margin-top: 3px;
-//         width: 94px;
-//     }
-//     .sort__item {
-//     }
-// }
+
 
 .product-card__wrapper {
     display: grid;

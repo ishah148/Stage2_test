@@ -7,13 +7,19 @@ import { Sort } from './Sort';
 class ProductService implements IProductService {
     private data: IProduct[] = []; // use only one time at once
     private filteredData: IProduct[] = []; //  current data for rendering components
+    private filterQuery: IFilter | null;
+    private sortQuery: SortQuery;
     private cartData: IProduct[] = [];
     private url: string = './assets/products_data/product.json';
     callbacks: Callbacks;
     constructor() {
         // this.init();
+        console.log(this);
+
         this.getProductsData(null);
         this.callbacks = {};
+        this.sortQuery = { type: null };
+        this.filterQuery = null;
     }
 
     async getProductsData(_filter: IFilter | null): Promise<IProduct[]> {
@@ -34,25 +40,27 @@ class ProductService implements IProductService {
 
     filterData(query: IFilter) {
         const filter = new Filter(query, this.data);
+        this.filterQuery = query;
         this.filteredData = filter.filterData()
         if (filter.filterData()) this.renderProducts(filter.filterData())
     }
+
     sortProcucts(query: SortQuery) {
-        console.log('service data',this.filteredData);
         const sort = new Sort(query, this.filteredData)
         this.filteredData = sort.sortData()
-        if(sort.sortData()) this.renderProducts(sort.sortData())
+        this.sortQuery = query;
+        console.log(this.sortQuery)
+        if (sort.sortData()) this.renderProducts(sort.sortData())
     }
+
     searchProducts(query: string) {
         let searchedData = this.data.filter((i) => i.name.toLowerCase().includes(query.toLowerCase()));
         if (!query) {
-            // searchedData = this.filteredData; //! TODO return this
-            searchedData = this.data;
+            searchedData = this.filteredData; //! TODO return this
+            // searchedData = this.data;
         }
         this.renderProducts(searchedData);
     }
-
-
 
     getProductsCb(renderProductsCb: (data: IProduct[] | null) => void) {
         this.callbacks.renderProducts = renderProductsCb;
