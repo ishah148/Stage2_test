@@ -162,7 +162,18 @@ main {
 
 
 
+.modal-body{
+    max-height: 750px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
 
+    &::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        background-color: var(--bs-gray-400);
+    }
+}
 .good-item {
     display: flex;
     justify-content: center;
@@ -170,7 +181,8 @@ main {
     height: 120px;
     margin-bottom: 10px;
     padding: 0.5rem;
-    background-color: #e6ddf8;
+    //! background-color: #e6ddf8; 
+    border: 1px solid var(--bs-gray-400);
     border-radius: 3px;
     gap: 1%;
 
