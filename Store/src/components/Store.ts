@@ -1,5 +1,5 @@
 import ProductService from '../service/Service';
-import { CartComponent } from './cart';
+import { CartComponent } from './CartComponent';
 import FilterComponent from './FilterComponent';
 import { ProductsComponent } from './ProductsComponent';
 import SearchComponent from './SearchComponent';
@@ -32,7 +32,7 @@ export class StoreComponent {
     async sendCallbaks() {
         this.search = new SearchComponent(this.service.searchProducts.bind(this.service));
         this.service.getProductsCb(this.products.render.bind(this.products));
-        this.service.getCartsCb(this.cart.render.bind(this.cart));
+        this.service.getCartCb(this.cart.render.bind(this.cart));
         const dataD = await this.service.productsData;
         this.filter.setProductsData(dataD);
         this.filter.setSendQueryCb(this.service.filterData.bind(this.service));

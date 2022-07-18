@@ -13,9 +13,7 @@ class ProductService implements IProductService {
     private url: string = './assets/products_data/product.json';
     callbacks: Callbacks;
     constructor() {
-        // this.init();
         console.log(this);
-
         this.getProductsData(null);
         this.callbacks = {};
         this.sortQuery = { type: null };
@@ -34,9 +32,7 @@ class ProductService implements IProductService {
     get productsData(): Promise<IProduct[]> {
         return this.getProductsData(null);
     }
-    // async init() {
-    //     this.filteredData = await this.getProductsData(null);
-    // }
+
 
     filterData(query: IFilter) {
         const filter = new Filter(query, this.data);
@@ -56,8 +52,7 @@ class ProductService implements IProductService {
     searchProducts(query: string) {
         let searchedData = this.filteredData.filter((i) => i.name.toLowerCase().includes(query.toLowerCase()));
         if (!query) {
-            searchedData = this.filteredData; //! TODO return this
-            // searchedData = this.data;
+            searchedData = this.filteredData;
         }
         this.renderProducts(searchedData);
     }
@@ -65,7 +60,7 @@ class ProductService implements IProductService {
     getProductsCb(renderProductsCb: (data: IProduct[] | null) => void) {
         this.callbacks.renderProducts = renderProductsCb;
     }
-    getCartsCb(renderCartCb: (data: IProduct[] | null) => void) {
+    getCartCb(renderCartCb: (data: IProduct[] | null) => void) {
         this.callbacks.renderCart = renderCartCb;
     }
 

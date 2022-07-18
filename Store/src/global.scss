@@ -12,6 +12,9 @@ header {
     button {
         height: 38px;
     }
+    .modal-dialog {
+        max-width: 710px;
+    }
 }
 main {
     // height: 500px;
@@ -187,7 +190,7 @@ main {
     gap: 1%;
 
     &__image-wrapper {
-        width: 25%;
+        width: 20%;
         height: 100%;
     }
 
@@ -196,13 +199,23 @@ main {
     }
 
     &__name {
-        width: 50%;
+        width: 40%;
         height: 50%;
         margin: 0px;
 
         font-size: 22px;
         color: #1f1436;
     }
+
+    &__quantity {
+        height: 100%;
+        width: 5%;
+
+        color:#1f1436;
+        font-size: 30px;
+        line-height: 90px;
+    }
+
 
     &__buttons-container {
         display: flex;
