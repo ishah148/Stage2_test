@@ -29,6 +29,7 @@ export type Callbacks = {
     renderProducts?: (data: IProduct[] | null) => void;
     renderCart?: (data: IProduct[] | null) => void;
     sendFilterQuery?: (query: IFilter) => void;
+    sendSortQuery?: (query: SortQuery) => void;
 };
 
 // export type FilterComponents = {

@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
-import { Callbacks, IFilter, IProduct, IProductService } from '../types/types';
+import { Callbacks, IFilter, IProduct, IProductService, SortQuery } from '../types/types';
 import { Filter } from './Filter';
+import { Sort } from './Sort';
 
 class ProductService implements IProductService {
     private data: IProduct[] = []; // use only one time at once
@@ -20,6 +21,7 @@ class ProductService implements IProductService {
         const data = await responce.json();
         this.data = data;
         this.renderProducts(data);
+        this.filteredData = data;
         return data;
     }
 
@@ -30,15 +32,16 @@ class ProductService implements IProductService {
     //     this.filteredData = await this.getProductsData(null);
     // }
 
-    getActualProducts() {
-        // this.renderProducts();
-        return this.filteredData;
-    }
-
     filterData(query: IFilter) {
-        console.log('servict this data',this.data);
         const filter = new Filter(query, this.data);
-        if(filter.filterData()) this.renderProducts(filter.filterData())
+        this.filteredData = filter.filterData()
+        if (filter.filterData()) this.renderProducts(filter.filterData())
+    }
+    sortProcucts(query: SortQuery) {
+        console.log('service data',this.filteredData);
+        const sort = new Sort(query, this.filteredData)
+        this.filteredData = sort.sortData()
+        if(sort.sortData()) this.renderProducts(sort.sortData())
     }
     searchProducts(query: string) {
         let searchedData = this.data.filter((i) => i.name.toLowerCase().includes(query.toLowerCase()));
@@ -46,9 +49,10 @@ class ProductService implements IProductService {
             // searchedData = this.filteredData; //! TODO return this
             searchedData = this.data;
         }
-        console.log(searchedData);
         this.renderProducts(searchedData);
     }
+
+
 
     getProductsCb(renderProductsCb: (data: IProduct[] | null) => void) {
         this.callbacks.renderProducts = renderProductsCb;

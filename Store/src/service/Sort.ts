@@ -7,25 +7,31 @@ export class Sort {
     constructor(query: SortQuery, data: IProduct[]) {
         this.query = query;
         this.data = JSON.parse(JSON.stringify(data));
+        console.log('sort data', data);
+    }
+
+    sortData(): IProduct[] {
         switch (this.query.type) {
             case 'nameAZ':
                 console.log(this.sortByNameAZ());
+                return this.sortByNameAZ();
                 break;
             case 'nameZA':
-                console.log(this.sortByNameZA());
+                return this.sortByNameZA();
                 break;
             case 'price19':
-                console.log(this.sortByPrice19());
+                return this.sortByPrice19();
                 break;
             case 'price91':
-                console.log(this.sortByPrice91());
+                return this.sortByPrice91();
                 break;
             default:
-                console.log('meeeeh');
+                return this.data;
         }
     }
 
     sortByNameAZ(): IProduct[] {
+        console.log('123');
         return this.data.sort((item1, item2) => (item1.name > item2.name ? 1 : -1));
     }
 

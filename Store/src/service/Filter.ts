@@ -8,15 +8,14 @@ export class Filter {
         this.data = data;
         console.log(this.filterObj);
     }
-
     filterData(): IProduct[] {
         // console.log(this.data);
         const resultArr: IProduct[] = [];
         for (const item of this.data) {
-            console.log(this.filterObj.color, item.color);
-            console.log(this.filterObj.company, item.company);
-            if (this.filterObj.color && !this.filterObj.color.includes(item.color)) continue;
-            if (this.filterObj.company && !this.filterObj.company.includes(item.company)) continue;
+            if (this.filterObj.color.length && !this.filterObj.color.includes(item.color)) continue;
+            if (this.filterObj.company.length && !this.filterObj.company.includes(item.company)) continue;
+            if (this.filterObj.camResolution.length && !this.filterObj.camResolution.includes(item.camResolution))
+                continue;
             if (this.filterObj.priceFrom && this.filterObj.priceFrom >= item.price) continue;
             if (this.filterObj.priceTo && this.filterObj.priceTo <= item.price) continue;
             if (this.filterObj.yearFrom && this.filterObj.yearFrom >= item.year) continue;

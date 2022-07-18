@@ -11,7 +11,7 @@ export class StoreComponent {
     private products!: ProductsComponent;
     private search!: SearchComponent;
     filter!: FilterComponent;
-    sortComp!: SortComponent;
+    sort!: SortComponent;
     constructor() {
         this.initComponents();
         this.sendCallbaks();
@@ -26,7 +26,7 @@ export class StoreComponent {
         this.products = new ProductsComponent();
         this.cart = new CartComponent();
         this.filter = new FilterComponent();
-        this.sortComp = new SortComponent();
+        this.sort = new SortComponent();
     }
 
     async sendCallbaks() {
@@ -36,6 +36,7 @@ export class StoreComponent {
         const dataD = await this.service.productsData;
         this.filter.setProductsData(dataD);
         this.filter.setSendQueryCb(this.service.filterData.bind(this.service));
+        this.sort.setSendQueryCb(this.service.sortProcucts.bind(this.service));
     }
 
     async load() {

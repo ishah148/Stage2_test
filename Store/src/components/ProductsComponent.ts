@@ -15,10 +15,6 @@ export class ProductsComponent implements IComponent {
         });
     }
 
-    // getActualProducts(): IProduct[] {
-    //     return this.getActualProductsCb();
-    // }
-
     clearProducts(): void {
         this.wrapper.querySelectorAll('.product-card').forEach((i) => i.remove());
     }
@@ -34,11 +30,11 @@ export class ProductsComponent implements IComponent {
             <div class="product-card__body  card-body">
                 <h6 class="product-card__name card-title">${obj.name}</h6>
                 <div class="product-card__price-and-color container d-flex justify-content-between align-items-center">
-                    <h6 class="product-card__price card-title">${obj.price}</h6>
+                    <h6 class="product-card__price card-title">${obj.price}$</h6>
                     <div class="product-card__color" style="background: ${obj.color}"></div>
                 </div>
-                <p class="card-text">${obj.description}</p>
-                <button class="product-card__add-to-cart btn btn-primary">Add ro cart 
+                <p class="card-text">${obj.camResolution}</p>
+                <button class="product-card__add-to-cart btn btn-primary" data-${obj.id}>Add ro cart 
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                         class="bi bi-cart3" viewBox="0 0 16 16">
                         <path

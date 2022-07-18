@@ -29,7 +29,6 @@ class FilterComponent implements IComponent {
         this.createComponents();
         this.render();
         this.createSelectors();
-        console.dir(this);
     }
 
     setProductsData(data: IProduct[]) {
@@ -40,6 +39,7 @@ class FilterComponent implements IComponent {
     setSendQueryCb(callback: (query: IFilter) => void) {
         this.callbacks.sendFilterQuery = callback;
     }
+
     render(): void {
         this.components.wrapper.insertAdjacentHTML('beforeend', this.components.container);
         const container = this.components.wrapper.querySelector('.filters-menu');
