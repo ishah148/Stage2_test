@@ -71,13 +71,19 @@ main {
 .sort__container {
     height: 40px;
     margin-right: 20px;
+    position: relative;
+    label{
+        // z-index: -1;
+    }
     .sort__input {
         // height: 15px;
+        z-index: -1;
     }
 
     .sort__item-svg {
         width: 18px;
         height: 18px;
+        z-index: -1;
     }
 
     .sort__item {

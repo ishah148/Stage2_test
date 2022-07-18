@@ -3,6 +3,7 @@ import { CartComponent } from './cart';
 import FilterComponent from './FilterComponent';
 import { ProductsComponent } from './ProductsComponent';
 import SearchComponent from './SearchComponent';
+import SortComponent from './SortComponent';
 
 export class StoreComponent {
     private cart!: CartComponent;
@@ -10,6 +11,7 @@ export class StoreComponent {
     private products!: ProductsComponent;
     private search!: SearchComponent;
     filter!: FilterComponent;
+    sortComp!: SortComponent;
     constructor() {
         this.initComponents();
         this.sendCallbaks();
@@ -24,6 +26,7 @@ export class StoreComponent {
         this.products = new ProductsComponent();
         this.cart = new CartComponent();
         this.filter = new FilterComponent();
+        this.sortComp = new SortComponent();
     }
 
     async sendCallbaks() {

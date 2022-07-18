@@ -97,7 +97,6 @@ class FilterComponent implements IComponent {
             ?.textContent;
         const yearTo = document.querySelector('#sliderYear > div > div:nth-child(3) > div > div.noUi-tooltip')
             ?.textContent;
-        console.log(priceFrom, priceTo, yearFrom, yearTo);
         if (priceFrom && priceTo && yearFrom && yearTo) {
             filterQuery.priceFrom = parseInt(priceFrom);
             filterQuery.priceTo = parseInt(priceTo);
