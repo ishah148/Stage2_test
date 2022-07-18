@@ -8,13 +8,11 @@ export class Sort {
         this.query = query;
         // this.data = JSON.parse(JSON.stringify(data));
         this.data = data;
-        console.log('sort data', data);
     }
 
     sortData(): IProduct[] {
         switch (this.query.type) {
             case 'nameAZ':
-                console.log(this.sortByNameAZ());
                 return this.sortByNameAZ();
                 break;
             case 'nameZA':
@@ -32,7 +30,6 @@ export class Sort {
     }
 
     sortByNameAZ(): IProduct[] {
-        console.log('123');
         return this.data.sort((item1, item2) => (item1.name > item2.name ? 1 : -1));
     }
 
