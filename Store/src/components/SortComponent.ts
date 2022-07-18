@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Callbacks, IComponent, IFilter, IProduct, SortQuery } from '../types/types';
 
 class SortComponent implements IComponent {
@@ -19,10 +20,21 @@ class SortComponent implements IComponent {
     }
     handleEvent() {
         this.buttons.forEach((btn) => {
-            btn.addEventListener('click', () => this.createQuery());
+            btn.addEventListener('click', (e) => {
+                this.toggleCheckedBittons(e);
+                this.createQuery();
+            });
         });
     }
-
+    toggleCheckedBittons(e: Event) {
+        const tagret = e.target as HTMLInputElement;
+        const pushedDataset = tagret.dataset.type as string;
+        this.buttons.forEach((btn) => {
+            if (btn.dataset.type !== pushedDataset) {
+                btn.checked = false;
+            }
+        })
+    }
     createQuery() {
         this.buttons.forEach((i) => {
             if (i.checked && i.dataset.type) {

@@ -2,6 +2,7 @@
 /* eslint-disable no-useless-escape */
 import { Callbacks, IFilter, IProduct, IProductService, SortQuery } from '../types/types';
 import { Filter } from './Filter';
+import StoreLocalStorage from './LocaStorage';
 import { Sort } from './Sort';
 
 class ProductService implements IProductService {
@@ -12,20 +13,33 @@ class ProductService implements IProductService {
     private cartData: IProduct[] = [];
     private url: string = './assets/products_data/product.json';
     callbacks: Callbacks;
+    storeLocalStorage: StoreLocalStorage;
     constructor() {
         console.log(this);
-        this.getProductsData(null);
+        // this.getProductsData(null);
         this.callbacks = {};
         this.sortQuery = { type: null };
         this.filterQuery = null;
+        this.storeLocalStorage = new StoreLocalStorage()
     }
 
     async getProductsData(_filter: IFilter | null): Promise<IProduct[]> {
         const responce = await fetch(this.url);
         const data = await responce.json();
         this.data = data;
-        this.renderProducts(data);
+        const filterQuery = this.storeLocalStorage.getLocalStorage('filterQuery')
+        const sortQuery = this.storeLocalStorage.getLocalStorage('sortQuery')
         this.filteredData = data;
+        if (sortQuery) {
+            this.sortProcucts(sortQuery as SortQuery)
+        }
+        if (filterQuery) {
+            this.filterData(filterQuery as IFilter)
+        }
+        else{
+            this.renderProducts(data);
+            this.filteredData = data;
+        }
         return data;
     }
 
@@ -35,13 +49,16 @@ class ProductService implements IProductService {
 
 
     filterData(query: IFilter) {
+        this.storeLocalStorage.setLocalStorage('filterQuery',query);
         const filter = new Filter(query, this.data);
         this.filterQuery = query;
         this.filteredData = filter.filterData()
+        console.log('this.filteredData',this.filteredData)
         if (filter.filterData()) this.renderProducts(filter.filterData())
     }
 
     sortProcucts(query: SortQuery) {
+        this.storeLocalStorage.setLocalStorage('sortQuery',query);
         const sort = new Sort(query, this.filteredData)
         // this.filteredData = sort.sortData()
         this.sortQuery = query;

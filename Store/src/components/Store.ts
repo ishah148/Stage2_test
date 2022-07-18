@@ -39,10 +39,10 @@ export class StoreComponent {
         this.sort.setSendQueryCb(this.service.sortProcucts.bind(this.service));
     }
 
-    async load() {
-        await this.service.getProductsData(null);
-        this.service.renderProducts(null);
-    }
+    // async load() {
+    //     await this.service.getProductsData(null);
+    //     this.service.renderProducts(null);
+    // }
 
     test() {
         console.log('StoreComp');
