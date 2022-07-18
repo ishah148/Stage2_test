@@ -28,6 +28,7 @@ export interface IProductService {
 export type Callbacks = {
     renderProducts?: (data: IProduct[] | null) => void;
     renderCart?: (data: IProduct[] | null) => void;
+    sendFilterQuery?: (query: IFilter) => void;
 };
 
 // export type FilterComponents = {
@@ -55,29 +56,7 @@ export interface ICartItem {
     product: IProduct;
     amount: number;
 }
-// }
-//     // plug from promise to []
-//     // if(!filter){
-//     //  await render(AllProductFromJSON)
-//     //}else{
-//     //await render(FilteredProducts)
-//     // }
-//     // render(getProducts())
-// }
 
-// interface IApiClient {
-//     getProducts(): Promise<IProduct[]>;
-// }
-
-// interface ICart {
-//     getAllItems(): ICartItem[];
-
-//     add(product: IProduct): void;
-
-//     remove(product: IProduct): void;
-// }
-
-// interface ICartItem {
-//     product: IProduct;
-//     amount: number;
-// }
+export type SortQuery = {
+    type: string | null;
+};

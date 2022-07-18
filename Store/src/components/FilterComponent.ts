@@ -1,4 +1,4 @@
-import { IComponent, IFilter, IProduct } from '../types/types';
+import { Callbacks, IComponent, IFilter, IProduct } from '../types/types';
 import * as noUiSlider from 'nouislider';
 import { target } from 'nouislider';
 import wNumb from 'wnumb';
@@ -22,8 +22,10 @@ class FilterComponent implements IComponent {
     private sliderPrice!: noUiSlider.target;
     private sliderYear!: noUiSlider.target;
     private filterQuery!: IFilter;
+    callbacks!: Callbacks;
 
     constructor() {
+        this.callbacks = {};
         this.createComponents();
         this.render();
         this.createSelectors();
@@ -35,7 +37,9 @@ class FilterComponent implements IComponent {
         this.renderCheckboxes();
         this.hanldeEvents();
     }
-
+    setSendQueryCb(callback: (query: IFilter) => void) {
+        this.callbacks.sendFilterQuery = callback;
+    }
     render(): void {
         this.components.wrapper.insertAdjacentHTML('beforeend', this.components.container);
         const container = this.components.wrapper.querySelector('.filters-menu');
@@ -72,9 +76,11 @@ class FilterComponent implements IComponent {
         this.createQuery();
     }
 
-    // sendQuery() {
-    //     '';
-    // }
+    sendQuery(query: IFilter) {
+        if (this.callbacks.sendFilterQuery) {
+            this.callbacks.sendFilterQuery(query);
+        }
+    }
     createQuery() {
         const filterQuery: IFilter = {
             color: [],
@@ -106,7 +112,8 @@ class FilterComponent implements IComponent {
             filterQuery.yearFrom = parseInt(yearFrom);
             filterQuery.yearTo = parseInt(yearTo);
         }
-        console.log(filterQuery);
+        console.log('query send');
+        this.sendQuery(filterQuery);
     }
 
     renderCheckboxes() {

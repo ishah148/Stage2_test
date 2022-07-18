@@ -1,13 +1,13 @@
-import { IProduct } from '../types/types';
+import { IProduct, SortQuery } from '../types/types';
 
 export class Sort {
-    private type: string;
+    private query: SortQuery;
     private data: IProduct[];
 
-    constructor(type: string, data: IProduct[]) {
-        this.type = type;
+    constructor(query: SortQuery, data: IProduct[]) {
+        this.query = query;
         this.data = JSON.parse(JSON.stringify(data));
-        switch (this.type) {
+        switch (this.query.type) {
             case 'nameAZ':
                 console.log(this.sortByNameAZ());
                 break;

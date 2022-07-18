@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
 import { Callbacks, IFilter, IProduct, IProductService } from '../types/types';
+import { Filter } from './Filter';
 
 class ProductService implements IProductService {
     private data: IProduct[] = []; // use only one time at once
@@ -34,11 +35,15 @@ class ProductService implements IProductService {
         return this.filteredData;
     }
 
+    filterData(query: IFilter) {
+        console.log('servict this data',this.data);
+        const filter = new Filter(query, this.data);
+        if(filter.filterData()) this.renderProducts(filter.filterData())
+    }
     searchProducts(query: string) {
-        // let searchedData = this.filteredData.filter((i) => i.name.includes(query.toLowerCase()));
         let searchedData = this.data.filter((i) => i.name.toLowerCase().includes(query.toLowerCase()));
         if (!query) {
-            // searchedData = this.filteredData;
+            // searchedData = this.filteredData; //! TODO return this
             searchedData = this.data;
         }
         console.log(searchedData);
@@ -48,7 +53,7 @@ class ProductService implements IProductService {
     getProductsCb(renderProductsCb: (data: IProduct[] | null) => void) {
         this.callbacks.renderProducts = renderProductsCb;
     }
-    getCardsCb(renderCartCb: (data: IProduct[] | null) => void) {
+    getCartsCb(renderCartCb: (data: IProduct[] | null) => void) {
         this.callbacks.renderCart = renderCartCb;
     }
 

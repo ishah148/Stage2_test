@@ -9,9 +9,7 @@ class SearchComponent implements IComponent {
         this.render();
         this.initEvents();
     }
-    search() {
-        // super.renderCart(getDataFromIput())
-    }
+
     render(): void {
         //TODO  draw search bar
         this.searchBar.insertAdjacentHTML('beforeend', this.getHTML());
@@ -27,14 +25,10 @@ class SearchComponent implements IComponent {
         `;
     }
     test(e: Event) {
-        // console.log(e);
         const searchQuery: string = (e.target as HTMLInputElement).value;
-        // console.log(searchQuery);
         this.searchServiceCb(searchQuery);
     }
     initEvents(): void {
-        //console.log('bar', this.searchBar);
-        //console.log('input', this.searchBarInput);
         this.searchBarInput.onchange = (e) => this.test(e);
     }
 }

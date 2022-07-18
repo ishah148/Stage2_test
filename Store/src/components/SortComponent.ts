@@ -1,7 +1,5 @@
-import { IComponent, IProduct } from '../types/types';
-type SortQuery = {
-    type: string | null;
-};
+import { IComponent, IProduct, SortQuery } from '../types/types';
+
 class SortComponent implements IComponent {
     buttons: NodeListOf<HTMLInputElement>;
     query: SortQuery;
@@ -27,7 +25,7 @@ class SortComponent implements IComponent {
             }
         });
     }
-    get sendQuery() {
+    get getQuery() {
         return this.query;
     }
 }

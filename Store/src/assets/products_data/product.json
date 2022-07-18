@@ -14,7 +14,7 @@
     {
         "id": 2,
         "name": "good2",
-        "price": 20,
+        "price": 100,
         "color": "blue",
         "description": "lorem",
         "imageSrc": "./assets/galaxya03.webp",
@@ -26,7 +26,7 @@
     {
         "id": 3,
         "name": "good3",
-        "price": 30,
+        "price": 152,
         "color": "green",
         "description": "lorem",
         "imageSrc": "./assets/redmi9c.webp",
@@ -38,7 +38,7 @@
     {
         "id": 4,
         "name": "iPhone11",
-        "price": 30,
+        "price": 222,
         "color": "white",
         "description": "lorem",
         "imageSrc": "./assets/iphone11.webp",
