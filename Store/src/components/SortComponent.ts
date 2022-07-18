@@ -35,6 +35,7 @@ class SortComponent implements IComponent {
             }
         })
     }
+
     createQuery() {
         this.buttons.forEach((i) => {
             if (i.checked && i.dataset.type) {
