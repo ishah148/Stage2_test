@@ -6,10 +6,8 @@ export class Filter {
     constructor(query: IFilter, data: IProduct[]) {
         this.filterObj = query;
         this.data = data;
-        console.log(this.filterObj);
     }
     filterData(): IProduct[] {
-        // console.log(this.data);
         const resultArr: IProduct[] = [];
         for (const item of this.data) {
             if (this.filterObj.color.length && !this.filterObj.color.includes(item.color)) continue;
@@ -22,7 +20,6 @@ export class Filter {
             if (this.filterObj.yearTo && this.filterObj.yearTo <= item.year) continue;
             resultArr.push(item);
         }
-        console.log(resultArr);
         return resultArr;
     }
 }

@@ -46,7 +46,6 @@ class SortComponent implements IComponent {
     }
 
     sendQuery(query: SortQuery) {
-        console.log('sended');
         if (this.callbacks.sendSortQuery) {
             this.callbacks.sendSortQuery(query);
         }

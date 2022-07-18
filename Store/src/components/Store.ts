@@ -23,7 +23,7 @@ export class StoreComponent {
 
     initComponents() {
         this.service = new ProductService();
-        this.products = new ProductsComponent();
+        this.products = new ProductsComponent(this.service.setСartData.bind(this.service));
         this.cart = new CartComponent();
         this.filter = new FilterComponent();
         this.sort = new SortComponent();
@@ -32,7 +32,7 @@ export class StoreComponent {
     async sendCallbaks() {
         this.search = new SearchComponent(this.service.searchProducts.bind(this.service));
         this.service.getProductsCb(this.products.render.bind(this.products));
-        this.service.getCartCb(this.cart.render.bind(this.cart));
+        this.service.getCartCb(this.cart.cartRender.bind(this.cart));
         const dataD = await this.service.productsData;
         this.filter.setProductsData(dataD);
         this.filter.setSendQueryCb(this.service.filterData.bind(this.service));
@@ -43,8 +43,4 @@ export class StoreComponent {
     //     await this.service.getProductsData(null);
     //     this.service.renderProducts(null);
     // }
-
-    test() {
-        console.log('StoreComp');
-    }
 }

@@ -10,7 +10,7 @@ class ProductService implements IProductService {
     private filteredData: IProduct[] = []; //  current data for rendering components
     private filterQuery: IFilter | null;
     private sortQuery: SortQuery;
-    private cartData: IProduct[] = [];
+    private _cartData: IProduct[] = [];
     private url: string = './assets/products_data/product.json';
     callbacks: Callbacks;
     storeLocalStorage: StoreLocalStorage;
@@ -47,13 +47,17 @@ class ProductService implements IProductService {
         return this.getProductsData(null);
     }
 
+    setСartData(data: IProduct[]): void {
+        this._cartData = data;
+    }
+
+
 
     filterData(query: IFilter) {
         this.storeLocalStorage.setLocalStorage('filterQuery',query);
         const filter = new Filter(query, this.data);
         this.filterQuery = query;
         this.filteredData = filter.filterData()
-        console.log('this.filteredData',this.filteredData)
         if (filter.filterData()) this.renderProducts(filter.filterData())
     }
 
@@ -62,7 +66,6 @@ class ProductService implements IProductService {
         const sort = new Sort(query, this.filteredData)
         // this.filteredData = sort.sortData()
         this.sortQuery = query;
-        console.log(this.sortQuery)
         if (sort.sortData()) this.renderProducts(this.filteredData)
     }
 
@@ -73,6 +76,8 @@ class ProductService implements IProductService {
         }
         this.renderProducts(searchedData);
     }
+
+    
 
     getProductsCb(renderProductsCb: (data: IProduct[] | null) => void) {
         this.callbacks.renderProducts = renderProductsCb;

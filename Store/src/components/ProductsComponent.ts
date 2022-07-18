@@ -3,9 +3,12 @@ import { IComponent, IProduct } from '../types/types';
 export class ProductsComponent implements IComponent {
     wrapper: HTMLElement;
     productsData: IProduct[] | null;
-    constructor() {
+    private setCartData: (data: IProduct[]) => void;
+    constructor(setCartData: (data: IProduct[]) => void) {
         this.wrapper = <HTMLElement>document.querySelector('.product-card__wrapper');
         this.productsData = null;
+        this.setCartData = setCartData;
+        this.handleEvents();
     }
 
     render(data: IProduct[] | null): void {
@@ -23,6 +26,20 @@ export class ProductsComponent implements IComponent {
         //!console.log('ProductsComponent test');
     }
 
+    handleEvents() {
+        console.log('----', document.querySelectorAll('#cart-sender'));
+        // document.querySelectorAll('#cart-sender').forEach((i) => {
+        //     i.addEventListener('click', (e) => this.addCartItem(e));
+        // });
+        // this.wrapper.onclick = (e) => this.addCartItem(e);
+    }
+
+    // addCartItem(e: Event) {
+    //     if ((e.target as HTMLElement).dataset.id) {
+
+    //     }
+    // }
+
     getHTML(obj: IProduct): string {
         return `
         <div class="product-card card">
@@ -34,7 +51,7 @@ export class ProductsComponent implements IComponent {
                     <div class="product-card__color" style="background: ${obj.color}"></div>
                 </div>
                 <p class="card-text">${obj.camResolution}</p>
-                <button class="product-card__add-to-cart btn btn-primary" data-${obj.id}>Add ro cart 
+                <button id="cart-sender" class="product-card__add-to-cart btn btn-primary" data-id="${obj.id}" data-Cart${obj.id}>Add ro cart 
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                         class="bi bi-cart3" viewBox="0 0 16 16">
                         <path
