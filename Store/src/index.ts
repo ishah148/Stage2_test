@@ -1,7 +1,7 @@
 import './components/app';
 // import Features from './components/controller/features';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.scss';
+// import 'bootstrap-icons/font/bootstrap-icons.scss';
 import 'nouislider';
 import './global.scss';
 
