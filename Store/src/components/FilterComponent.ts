@@ -29,6 +29,13 @@ class FilterComponent implements IComponent {
         this.createSelectors();
         console.dir(this);
     }
+
+    setProductsData(data: IProduct[]) {
+        this.data = data;
+        this.renderCheckboxes();
+        this.hanldeEvents();
+    }
+
     render(): void {
         this.components.wrapper.insertAdjacentHTML('beforeend', this.components.container);
         const container = this.components.wrapper.querySelector('.filters-menu');
@@ -43,11 +50,6 @@ class FilterComponent implements IComponent {
     }
     click(): void {
         //e.tagret = callback();
-    }
-    setProductsData(data: IProduct[]) {
-        this.data = data;
-        this.renderCheckboxes();
-        this.hanldeEvents();
     }
 
     hanldeEvents() {
@@ -67,6 +69,7 @@ class FilterComponent implements IComponent {
         });
         (this.sliderYear.noUiSlider as noUiSlider.API).reset();
         (this.sliderPrice.noUiSlider as noUiSlider.API).reset();
+        this.createQuery();
     }
 
     // sendQuery() {
