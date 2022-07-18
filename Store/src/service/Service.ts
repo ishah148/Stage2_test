@@ -47,14 +47,14 @@ class ProductService implements IProductService {
 
     sortProcucts(query: SortQuery) {
         const sort = new Sort(query, this.filteredData)
-        this.filteredData = sort.sortData()
+        // this.filteredData = sort.sortData()
         this.sortQuery = query;
         console.log(this.sortQuery)
-        if (sort.sortData()) this.renderProducts(sort.sortData())
+        if (sort.sortData()) this.renderProducts(this.filteredData)
     }
 
     searchProducts(query: string) {
-        let searchedData = this.data.filter((i) => i.name.toLowerCase().includes(query.toLowerCase()));
+        let searchedData = this.filteredData.filter((i) => i.name.toLowerCase().includes(query.toLowerCase()));
         if (!query) {
             searchedData = this.filteredData; //! TODO return this
             // searchedData = this.data;
