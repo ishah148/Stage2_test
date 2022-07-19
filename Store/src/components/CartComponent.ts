@@ -1,12 +1,15 @@
+import Service from '../service/Service';
 import { IComponent, IProduct } from '../types/types';
 
 export class CartComponent {
     private header: HTMLElement;
     private modalBody: HTMLElement;
-    constructor() {
+    service: Service;
+    constructor(service: Service) {
         this.header = <HTMLElement>document.querySelector('header');
         this.modalWindowRender();
         this.modalBody = <HTMLElement>document.querySelector('.modal-body');
+        this.service = service;
     }
 
     modalWindowRender(): void {

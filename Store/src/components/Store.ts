@@ -23,8 +23,8 @@ export class StoreComponent {
 
     initComponents() {
         this.service = new ProductService();
-        this.products = new ProductsComponent(this.service.setСartData.bind(this.service));
-        this.cart = new CartComponent();
+        this.products = new ProductsComponent(this.service);
+        this.cart = new CartComponent(this.service);
         this.filter = new FilterComponent();
         this.sort = new SortComponent();
     }

@@ -155,6 +155,7 @@ main {
         .product-card__add-to-cart {
             svg {
                 margin-bottom: 3px;
+                pointer-events: none;
             }
         }
         button {

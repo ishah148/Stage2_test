@@ -36,7 +36,7 @@ class ProductService implements IProductService {
         if (filterQuery) {
             this.filterData(filterQuery as IFilter)
         }
-        else{
+        else {
             this.renderProducts(data);
             this.filteredData = data;
         }
@@ -51,10 +51,14 @@ class ProductService implements IProductService {
         this._cartData = data;
     }
 
-
+    addCartItem(id: number) {
+        const item = this.data.find((i) => i.id === id);
+        this._cartData.push(item as IProduct)
+        this.renderCart(this._cartData)
+    }
 
     filterData(query: IFilter) {
-        this.storeLocalStorage.setLocalStorage('filterQuery',query);
+        this.storeLocalStorage.setLocalStorage('filterQuery', query);
         const filter = new Filter(query, this.data);
         this.filterQuery = query;
         this.filteredData = filter.filterData()
@@ -62,7 +66,7 @@ class ProductService implements IProductService {
     }
 
     sortProcucts(query: SortQuery) {
-        this.storeLocalStorage.setLocalStorage('sortQuery',query);
+        this.storeLocalStorage.setLocalStorage('sortQuery', query);
         const sort = new Sort(query, this.filteredData)
         // this.filteredData = sort.sortData()
         this.sortQuery = query;
@@ -77,7 +81,7 @@ class ProductService implements IProductService {
         this.renderProducts(searchedData);
     }
 
-    
+
 
     getProductsCb(renderProductsCb: (data: IProduct[] | null) => void) {
         this.callbacks.renderProducts = renderProductsCb;
