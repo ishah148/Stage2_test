@@ -9,6 +9,7 @@ export interface IProduct {
     camResolution: string;
     year: number;
     onStorage: number;
+    onServe?: number;
 }
 
 export interface IFilter {

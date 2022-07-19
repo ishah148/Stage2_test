@@ -19,7 +19,7 @@ class SearchComponent implements IComponent {
     }
     getHTML(): string {
         return `
-        <div class="input-group w-75">
+        <div class="input-group">
             <input class="search__input form-control rounded" id="search " type="search"  placeholder="Search" aria-label="Search"
                 aria-describedby="search-addon" />
             <button  type="button" class="search__button btn btn-outline-primary ms-1">search</button>

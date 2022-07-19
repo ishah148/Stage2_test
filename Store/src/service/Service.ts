@@ -29,6 +29,7 @@ class ProductService implements IProductService {
         this.data = data;
         const filterQuery = this.storeLocalStorage.getLocalStorage('filterQuery')
         const sortQuery = this.storeLocalStorage.getLocalStorage('sortQuery')
+        const cartData = this.storeLocalStorage.getLocalStorage('cartData')
         this.filteredData = data;
         if (sortQuery) {
             this.sortProcucts(sortQuery as SortQuery)
@@ -36,9 +37,13 @@ class ProductService implements IProductService {
         if (filterQuery) {
             this.filterData(filterQuery as IFilter)
         }
-        else{
+        else {
             this.renderProducts(data);
             this.filteredData = data;
+        }
+        if(cartData){
+            this._cartData = cartData as IProduct[];
+            this.renderCart(cartData as IProduct[]);
         }
         return data;
     }
@@ -46,15 +51,50 @@ class ProductService implements IProductService {
     get productsData(): Promise<IProduct[]> {
         return this.getProductsData(null);
     }
-
+    get cartData(): IProduct[] {
+        return this._cartData
+    }
     setСartData(data: IProduct[]): void {
         this._cartData = data;
     }
 
+    addCartItem(id: number) {
+        console.log(' addcart ',);
+        const item = this.data.find((i) => i.id === id) as IProduct;
+        const countItemInCart = this._cartData.filter((i) => i.id === id).length
+        if((item.onServe as number) > item.onStorage){
+            //TODO call notification
+        }
+        if (!countItemInCart) {
+            item.onServe = 1;
+            this._cartData.push(item as IProduct)
+        } else if ((item.onServe as number) < item.onStorage) {
+            this._cartData.forEach((i) => i.id === id ? (i.onServe as number) += 1 : 'nothing')
+        }
+        this.storeLocalStorage.setLocalStorage('cartData',this._cartData)
+        this.renderCart(this._cartData);
+    }
 
+    removeCartItem(id: number) {
+        const item = this.data.find((i) => i.id === id) as IProduct;
+        if (item.onServe === 1) {
+            item.onServe = 0;
+            this._cartData = this._cartData.filter((i) => (i.onServe as number) > 0);
+        } else {
+            this._cartData.forEach((i) => i.id === id ? (i.onServe as number) -= 1 : 'nothing')
+        }
+        this.storeLocalStorage.setLocalStorage('cartData',this._cartData)
+        this.renderCart(this._cartData);
+    }
+
+    clearCart(){
+        this._cartData = [];
+        this.storeLocalStorage.setLocalStorage('cartData',this._cartData);
+        this.renderCart(this._cartData);
+    }
 
     filterData(query: IFilter) {
-        this.storeLocalStorage.setLocalStorage('filterQuery',query);
+        this.storeLocalStorage.setLocalStorage('filterQuery', query);
         const filter = new Filter(query, this.data);
         this.filterQuery = query;
         this.filteredData = filter.filterData()
@@ -62,7 +102,7 @@ class ProductService implements IProductService {
     }
 
     sortProcucts(query: SortQuery) {
-        this.storeLocalStorage.setLocalStorage('sortQuery',query);
+        this.storeLocalStorage.setLocalStorage('sortQuery', query);
         const sort = new Sort(query, this.filteredData)
         // this.filteredData = sort.sortData()
         this.sortQuery = query;
@@ -77,7 +117,7 @@ class ProductService implements IProductService {
         this.renderProducts(searchedData);
     }
 
-    
+
 
     getProductsCb(renderProductsCb: (data: IProduct[] | null) => void) {
         this.callbacks.renderProducts = renderProductsCb;

@@ -1,14 +1,15 @@
+import Service from '../service/Service';
 import { IComponent, IProduct } from '../types/types';
 
 export class ProductsComponent implements IComponent {
     wrapper: HTMLElement;
     productsData: IProduct[] | null;
-    private setCartData: (data: IProduct[]) => void;
-    constructor(setCartData: (data: IProduct[]) => void) {
+    service: Service;
+
+    constructor(service: Service) {
         this.wrapper = <HTMLElement>document.querySelector('.product-card__wrapper');
         this.productsData = null;
-        this.setCartData = setCartData;
-        this.handleEvents();
+        this.service = service;
     }
 
     render(data: IProduct[] | null): void {
@@ -16,29 +17,24 @@ export class ProductsComponent implements IComponent {
         data?.forEach((data: IProduct) => {
             return this.wrapper.insertAdjacentHTML('beforeend', this.getHTML(data));
         });
+        this.handleEvents();
     }
 
     clearProducts(): void {
         this.wrapper.querySelectorAll('.product-card').forEach((i) => i.remove());
     }
 
-    test() {
-        //!console.log('ProductsComponent test');
-    }
-
     handleEvents() {
-        console.log('----', document.querySelectorAll('#cart-sender'));
-        // document.querySelectorAll('#cart-sender').forEach((i) => {
-        //     i.addEventListener('click', (e) => this.addCartItem(e));
-        // });
-        // this.wrapper.onclick = (e) => this.addCartItem(e);
+        const productsButtons = document.querySelectorAll('#cart-sender');
+        productsButtons.forEach((i) => {
+            (i as HTMLElement).onclick = (e) => this.addCartItem(e);
+        });
     }
 
-    // addCartItem(e: Event) {
-    //     if ((e.target as HTMLElement).dataset.id) {
-
-    //     }
-    // }
+    addCartItem(e: Event) {
+        const id = (e.target as HTMLElement).dataset.id;
+        if (typeof id === 'string') this.service.addCartItem(+id);
+    }
 
     getHTML(obj: IProduct): string {
         return `
