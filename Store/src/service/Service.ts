@@ -52,9 +52,27 @@ class ProductService implements IProductService {
     }
 
     addCartItem(id: number) {
-        const item = this.data.find((i) => i.id === id);
-        this._cartData.push(item as IProduct)
-        this.renderCart(this._cartData)
+        console.log(' addcart ',);
+        const item = this.data.find((i) => i.id === id) as IProduct;
+        const countItemInCart = this._cartData.filter((i) => i.id === id).length
+        if (!countItemInCart) {
+            item.onServe = 0;
+            this._cartData.push(item as IProduct)
+        } else {
+            this._cartData.forEach((i) => i.id === id ? (i.onServe as number) += 1 : 'nothing')
+        }
+        this.renderCart(this._cartData);
+    }
+
+    removeCartItem(id: number) {
+        const item = this.data.find((i) => i.id === id) as IProduct;
+        if (item.onServe === 1) {
+            item.onServe = 0;
+            this._cartData = this._cartData.filter((i) => (i.onServe as number) > 0);
+        } else {
+            this._cartData.forEach((i) => i.id === id ? (i.onServe as number) -= 1 : 'nothing')
+        }
+        this.renderCart(this._cartData);
     }
 
     filterData(query: IFilter) {
