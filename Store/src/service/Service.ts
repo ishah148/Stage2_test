@@ -63,7 +63,7 @@ class ProductService implements IProductService {
         const item = this.data.find((i) => i.id === id) as IProduct;
         const countItemInCart = this._cartData.filter((i) => i.id === id).length
         if((item.onServe as number) > item.onStorage){
-            //TODO call notofication
+            //TODO call notification
         }
         if (!countItemInCart) {
             item.onServe = 1;
@@ -84,6 +84,12 @@ class ProductService implements IProductService {
             this._cartData.forEach((i) => i.id === id ? (i.onServe as number) -= 1 : 'nothing')
         }
         this.storeLocalStorage.setLocalStorage('cartData',this._cartData)
+        this.renderCart(this._cartData);
+    }
+
+    clearCart(){
+        this._cartData = [];
+        this.storeLocalStorage.setLocalStorage('cartData',this._cartData);
         this.renderCart(this._cartData);
     }
 

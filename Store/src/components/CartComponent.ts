@@ -6,10 +6,12 @@ export class CartComponent {
     private modalBody: HTMLElement;
     service: Service;
     cartCountEl: HTMLElement;
+    clearBtn: HTMLElement;
     constructor(service: Service) {
         this.header = <HTMLElement>document.querySelector('header');
         this.cartCountEl = <HTMLElement>document.getElementById('cart-count');
         this.modalWindowRender();
+        this.clearBtn = <HTMLElement>document.getElementById('clear-cart');
         this.modalBody = <HTMLElement>document.querySelector('.modal-body');
         this.service = service;
     }
@@ -22,6 +24,7 @@ export class CartComponent {
         this.modalBody.querySelectorAll('.good-item__remove-button').forEach((i) => {
             (i as HTMLElement).onclick = (e) => this.removeCartItem(e);
         });
+        this.clearBtn.onclick = () => this.service.clearCart();
     }
     addCartItem(e: Event) {
         const id = (e.target as HTMLElement).dataset.id;
@@ -99,6 +102,7 @@ export class CartComponent {
 
                     </div>
                     <div class="modal-footer">
+                        <button id="clear-cart" type="button" class="btn btn-danger">Clear</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary">Order</button>
                     </div>
