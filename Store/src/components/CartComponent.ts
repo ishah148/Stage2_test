@@ -5,8 +5,10 @@ export class CartComponent {
     private header: HTMLElement;
     private modalBody: HTMLElement;
     service: Service;
+    cartCountEl: HTMLElement;
     constructor(service: Service) {
         this.header = <HTMLElement>document.querySelector('header');
+        this.cartCountEl = <HTMLElement>document.getElementById('cart-count');
         this.modalWindowRender();
         this.modalBody = <HTMLElement>document.querySelector('.modal-body');
         this.service = service;
@@ -41,10 +43,18 @@ export class CartComponent {
             return this.modalBody.insertAdjacentHTML('beforeend', this.getItemHTML(data));
         });
         this.handleEvents();
+        this.updateCartCount();
     }
-
     clearCartItems() {
         this.modalBody.querySelectorAll('.good-item').forEach((i) => i.remove());
+    }
+
+    updateCartCount() {
+        // console.log('', this.cartCountEl.textContent);
+        (this.cartCountEl.textContent as string) =
+            this.service.cartData.reduce((res, i) => {
+                return (res += i.onServe || 0);
+            }, 0) + '';
     }
 
     getItemHTML(data: IProduct): string {
