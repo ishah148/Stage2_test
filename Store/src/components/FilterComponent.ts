@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Callbacks, IComponent, IFilter, IProduct } from '../types/types';
 import * as noUiSlider from 'nouislider';
 import { target } from 'nouislider';
@@ -91,13 +92,16 @@ class FilterComponent implements IComponent {
             priceTo: 1000,
             yearFrom: 2010,
             yearTo: 2022,
-            isPopular: [false],
+            isPopular: false,
         };
         this.selectors.container.querySelectorAll('input').forEach((i) => {
             const value = i.dataset.value;
             const name = i.dataset.filter;
-            if (i.checked) {
+            if (i.checked && name !== 'isPopular') {
                 (filterQuery[`${name as keyof typeof filterQuery}`] as string[]).push(value as string);
+            }
+            if (i.checked && name === 'isPopular') {
+                filterQuery.isPopular = true;
             }
         });
         const priceFrom = document.querySelector('#sliderPrice > div > div:nth-child(2) > div > div.noUi-tooltip')
@@ -118,17 +122,27 @@ class FilterComponent implements IComponent {
         this.sendQuery(filterQuery);
     }
     updateFilters(): void {
+        const popularBtn = document.getElementById('popular-filter') as HTMLInputElement;
         const query = this.filterQuery;
         if (!query) return;
         const checkedValues: string[] = [];
         query.color.forEach((i) => checkedValues.push(i));
         query.company.forEach((i) => checkedValues.push(i));
         query.camResolution.forEach((i) => checkedValues.push(i));
-        // query.color.forEach(color => )
+        console.log('', popularBtn);
+        if (popularBtn && typeof popularBtn.dataset.filter) {
+            // (popularBtn).dataset.filter.isPopular = query.isPopular;
+            (popularBtn.checked) = query.isPopular;
+        }
+
         this.selectors.container.querySelectorAll('input').forEach((i) => {
-            if (checkedValues.includes(i.dataset.value as string)) {
-                //
+            if (checkedValues.includes(i.dataset.value as string) && i.dataset.filter !== 'isPopular') {
                 i.checked = true;
+            }
+            // console.log('i.dataset.filter', i.dataset.filter);
+            // console.log('i.dataset.value', i.dataset.value);
+            if (i.dataset.filter === 'isPopular' && i.dataset.value === 'true') {
+                console.log('', 888);
             }
         });
         (this.sliderPrice.noUiSlider as noUiSlider.API).set([query.priceFrom, query.priceTo]);
@@ -155,12 +169,10 @@ class FilterComponent implements IComponent {
         data.forEach((obj) => {
             // TODO remove duplicate
             const temp = `
-            <input class= "form-check-input" type ="checkbox" value ="" id = "id-${
-                obj[`${type as keyof typeof obj}`]
-            }" data-filter="${type}" data-value="${obj[`${type as keyof typeof obj}`]}" >
-             <label class="form-check-label" for="id-${obj[`${type as keyof typeof obj}`]}"> ${
-                obj[`${type as keyof typeof obj}`]
-            } </label><br>`;
+            <input class= "form-check-input" type ="checkbox" value ="" id = "id-${obj[`${type as keyof typeof obj}`]
+                }" data-filter="${type}" data-value="${obj[`${type as keyof typeof obj}`]}" >
+             <label class="form-check-label" for="id-${obj[`${type as keyof typeof obj}`]}"> ${obj[`${type as keyof typeof obj}`]
+                } </label><br>`;
             HTML.push(temp);
         });
         const uniqHTML = new Set(HTML);
@@ -185,8 +197,8 @@ class FilterComponent implements IComponent {
                     aria-label="Close"></button>
             </div>
             <div class="form-check form-switch mx-3">
-                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" data-value="false" data-filter="isPopular">
-                 <label class="form-check-label" for="flexSwitchCheckDefault">Show Only Popular</label>
+                 <input class="form-check-input" type="checkbox" id="popular-filter" data-value="false" data-filter="isPopular">
+                 <label class="form-check-label" for="popular-filter">Show Only Popular</label>
             </div>
             `,
             body: `<div class="filters-menu__body offcanvas-body"></div>`,

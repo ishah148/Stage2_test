@@ -12,12 +12,14 @@ export class Filter {
         for (const item of this.data) {
             if (this.filterObj.color.length && !this.filterObj.color.includes(item.color)) continue;
             if (this.filterObj.company.length && !this.filterObj.company.includes(item.company)) continue;
+            if (this.filterObj.color.length && !this.filterObj.color.includes(item.color)) continue;
             if (this.filterObj.camResolution.length && !this.filterObj.camResolution.includes(item.camResolution))
                 continue;
             if (this.filterObj.priceFrom && this.filterObj.priceFrom >= item.price) continue;
             if (this.filterObj.priceTo && this.filterObj.priceTo <= item.price) continue;
             if (this.filterObj.yearFrom && this.filterObj.yearFrom >= item.year) continue;
             if (this.filterObj.yearTo && this.filterObj.yearTo <= item.year) continue;
+            if (this.filterObj.isPopular && item.onStorage > 5) continue;
             resultArr.push(item);
         }
         return resultArr;

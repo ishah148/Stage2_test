@@ -93,7 +93,7 @@
         "company": "China",
         "camResolution":"12 Mp",
         "year":2013,
-        "onStorage":15
+        "onStorage":1
     },
     {
         "id": 9,
@@ -180,7 +180,7 @@
         "company": "China",
         "camResolution":"13 Mp",
         "year":2020,
-        "onStorage":10
+        "onStorage":2
     },
     {
         "id": 16,
@@ -252,11 +252,11 @@
         "company": "China",
         "camResolution":"12 Mp",
         "year":2013,
-        "onStorage":15
+        "onStorage":5
     },
     {
         "id": 22,
-        "name": "zte blade",
+        "name": "zte blade v8",
         "price": 250,
         "color": "black",
         "description": "lorem",
