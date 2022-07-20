@@ -21,10 +21,11 @@ class FilterComponent implements IComponent {
     private selectors!: Selectors;
     private sliderPrice!: noUiSlider.target;
     private sliderYear!: noUiSlider.target;
-    private filterQuery!: IFilter;
+    private filterQuery: IFilter | null;
     callbacks!: Callbacks;
 
     constructor() {
+        this.filterQuery = null;
         this.callbacks = {};
         this.createComponents();
         this.render();
@@ -115,6 +116,23 @@ class FilterComponent implements IComponent {
         console.log('query send');
         this.sendQuery(filterQuery);
     }
+    updateFilters(): void {
+        const query = this.filterQuery;
+        if (!query) return;
+        const checkedValues: string[] = [];
+        query.color.forEach((i) => checkedValues.push(i));
+        query.company.forEach((i) => checkedValues.push(i));
+        query.camResolution.forEach((i) => checkedValues.push(i));
+        console.log(checkedValues);
+        // query.color.forEach(color => )
+        console.log(this.selectors.container.querySelectorAll('input'));
+        this.selectors.container.querySelectorAll('input').forEach((i) => {
+            if (checkedValues.includes(i.dataset.value as string)) {
+                // console.log(i);
+                i.checked = true;
+            }
+        });
+    }
 
     renderCheckboxes() {
         this.selectors.filterCompany.insertAdjacentHTML('beforeend', this.getCheckboxHTML(this.data, 'company'));
@@ -123,6 +141,7 @@ class FilterComponent implements IComponent {
             'beforeend',
             this.getCheckboxHTML(this.data, 'camResolution')
         );
+        this.updateFilters();
     }
 
     getCheckboxHTML(data: IProduct[], type: string): string {
@@ -137,13 +156,17 @@ class FilterComponent implements IComponent {
             HTML.push(`<input class= "form-check-input" type ="checkbox" value ="" id = "id-${
                 obj[`${type as keyof typeof obj}`]
             }" data-filter="${type}" data-value="${obj[`${type as keyof typeof obj}`]}" >
-        <label class="form-check-label" for="id-${obj[`${type as keyof typeof obj}`]}"> ${
+             <label class="form-check-label" for="id-${obj[`${type as keyof typeof obj}`]}"> ${
                 obj[`${type as keyof typeof obj}`]
             } </label><br>`);
         });
         // console.dir(a);
         const uniqHTML = new Set(HTML);
         return [...uniqHTML].join('');
+    }
+
+    set setCurrentQuery(query: IFilter) {
+        this.filterQuery = query;
     }
 
     createComponents() {

@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
+import FilterComponent from '../components/FilterComponent';
 import { Callbacks, IFilter, IProduct, IProductService, SortQuery } from '../types/types';
 import { Filter } from './Filter';
 import StoreLocalStorage from './LocaStorage';
@@ -13,7 +14,8 @@ class ProductService implements IProductService {
     private _cartData: IProduct[] = [];
     private url: string = './assets/products_data/product.json';
     callbacks: Callbacks;
-    storeLocalStorage: StoreLocalStorage;
+    private storeLocalStorage: StoreLocalStorage;
+    private filterComponent!: FilterComponent;
     constructor() {
         console.log(this);
         // this.getProductsData(null);
@@ -27,21 +29,23 @@ class ProductService implements IProductService {
         const responce = await fetch(this.url);
         const data = await responce.json();
         this.data = data;
-        const filterQuery = this.storeLocalStorage.getLocalStorage('filterQuery')
-        const sortQuery = this.storeLocalStorage.getLocalStorage('sortQuery')
-        const cartData = this.storeLocalStorage.getLocalStorage('cartData')
+        const filterQuery = this.storeLocalStorage.getLocalStorage('filterQuery');
+        const sortQuery = this.storeLocalStorage.getLocalStorage('sortQuery');
+        const cartData = this.storeLocalStorage.getLocalStorage('cartData');
         this.filteredData = data;
         if (sortQuery) {
             this.sortProcucts(sortQuery as SortQuery)
         }
         if (filterQuery) {
-            this.filterData(filterQuery as IFilter)
+            this.filterComponent.setCurrentQuery = filterQuery as IFilter
+            this.filterData(filterQuery as IFilter);
+            this.filterComponent.updateFilters();
         }
         else {
             this.renderProducts(data);
             this.filteredData = data;
         }
-        if(cartData){
+        if (cartData) {
             this._cartData = cartData as IProduct[];
             this.renderCart(cartData as IProduct[]);
         }
@@ -62,8 +66,9 @@ class ProductService implements IProductService {
         console.log(' addcart ',);
         const item = this.data.find((i) => i.id === id) as IProduct;
         const countItemInCart = this._cartData.filter((i) => i.id === id).length
-        if((item.onServe as number) > item.onStorage){
+        if ((item.onServe as number) >= item.onStorage) {
             //TODO call notification
+            alert("Извините, недостаточно товаров на складе");
         }
         if (!countItemInCart) {
             item.onServe = 1;
@@ -71,7 +76,7 @@ class ProductService implements IProductService {
         } else if ((item.onServe as number) < item.onStorage) {
             this._cartData.forEach((i) => i.id === id ? (i.onServe as number) += 1 : 'nothing')
         }
-        this.storeLocalStorage.setLocalStorage('cartData',this._cartData)
+        this.storeLocalStorage.setLocalStorage('cartData', this._cartData)
         this.renderCart(this._cartData);
     }
 
@@ -83,13 +88,13 @@ class ProductService implements IProductService {
         } else {
             this._cartData.forEach((i) => i.id === id ? (i.onServe as number) -= 1 : 'nothing')
         }
-        this.storeLocalStorage.setLocalStorage('cartData',this._cartData)
+        this.storeLocalStorage.setLocalStorage('cartData', this._cartData)
         this.renderCart(this._cartData);
     }
 
-    clearCart(){
+    clearCart() {
         this._cartData = [];
-        this.storeLocalStorage.setLocalStorage('cartData',this._cartData);
+        this.storeLocalStorage.setLocalStorage('cartData', this._cartData);
         this.renderCart(this._cartData);
     }
 
@@ -126,6 +131,10 @@ class ProductService implements IProductService {
         this.callbacks.renderCart = renderCartCb;
     }
 
+    set setFilter(filter:FilterComponent){
+        this.filterComponent = filter
+    }
+
     renderProducts(data: IProduct[] | null): void {
         if (this.callbacks.renderProducts) {
             this.callbacks.renderProducts(data);
@@ -136,6 +145,7 @@ class ProductService implements IProductService {
             this.callbacks.renderCart(data);
         }
     }
+
 }
 
 export default ProductService;

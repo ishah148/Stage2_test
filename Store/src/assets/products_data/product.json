@@ -61,7 +61,7 @@
     },
     {
         "id": 6,
-        "name": "Realme c6",
+        "name": "realme c6",
         "price": 100,
         "color": "grey",
         "description": "lorem",
@@ -73,7 +73,7 @@
     },
     {
         "id": 7,
-        "name": "Realme c5",
+        "name": "realme c5",
         "price": 100,
         "color": "yellow",
         "description": "lorem",
@@ -85,7 +85,7 @@
     },
     {
         "id": 8,
-        "name": "China k4",
+        "name": "china k4 3g",
         "price": 50,
         "color": "green",
         "description": "lorem",
@@ -97,7 +97,7 @@
     },
     {
         "id": 9,
-        "name": "Zte blade",
+        "name": "zte blade",
         "price": 275,
         "color": "black",
         "description": "lorem",
@@ -109,7 +109,7 @@
     },
     {
         "id": 10,
-        "name": "Honor 50",
+        "name": "honor 50",
         "price": 850,
         "color": "blue",
         "description": "lorem",
@@ -121,7 +121,7 @@
     },
     {
         "id": 11,
-        "name": "ZTE Blade A51",
+        "name": "zte blade A51",
         "price": 850,
         "color": "green",
         "description": "lorem",
@@ -133,7 +133,7 @@
     },
     {
         "id": 12,
-        "name": "Honor X8",
+        "name": "honor X8",
         "price": 550,
         "color": "blue",
         "description": "lorem",
@@ -145,7 +145,7 @@
     },
     {
         "id": 13,
-        "name": "iPhone 11",
+        "name": "iphone 11",
         "price": 550,
         "color": "black",
         "description": "lorem",
@@ -172,7 +172,7 @@
     },
     {
         "id": 15,
-        "name": "China k5",
+        "name": "china k5",
         "price": 500,
         "color": "green",
         "description": "lorem",
@@ -184,7 +184,7 @@
     },
     {
         "id": 16,
-        "name": "China k5",
+        "name": "china k5",
         "price": 550,
         "color": "black",
         "description": "lorem",
@@ -196,7 +196,7 @@
     },
     {
         "id": 17,
-        "name": "iPhone11",
+        "name": "iphone11",
         "price": 222,
         "color": "white",
         "description": "lorem",
@@ -208,7 +208,7 @@
     },
     {
         "id": 18,
-        "name": "iPhone11",
+        "name": "iphone11",
         "price": 900,
         "color": "red",
         "description": "lorem",
@@ -220,7 +220,7 @@
     },
     {
         "id": 19,
-        "name": "Realme c6",
+        "name": "realme c6",
         "price": 100,
         "color": "green",
         "description": "lorem",
@@ -232,7 +232,7 @@
     },
     {
         "id": 20,
-        "name": "Realme c6",
+        "name": "realme c6",
         "price": 250,
         "color": "yellow",
         "description": "lorem",
@@ -244,7 +244,7 @@
     },
     {
         "id": 21,
-        "name": "China k4",
+        "name": "china k4",
         "price": 150,
         "color": "red",
         "description": "lorem",
@@ -256,7 +256,7 @@
     },
     {
         "id": 22,
-        "name": "Zte blade",
+        "name": "zte blade",
         "price": 250,
         "color": "black",
         "description": "lorem",
@@ -268,7 +268,7 @@
     },
     {
         "id": 23,
-        "name": "Honor 50",
+        "name": "honor 50",
         "price": 800,
         "color": "green",
         "description": "lorem",
@@ -280,7 +280,7 @@
     },
     {
         "id": 24,
-        "name": "ZTE Blade A51",
+        "name": "zte blade a51",
         "price": 680,
         "color": "black",
         "description": "lorem",
@@ -292,7 +292,7 @@
     },
     {
         "id": 25,
-        "name": "Honor X8",
+        "name": "honor X8",
         "price": 458,
         "color": "white",
         "description": "lorem",
@@ -304,7 +304,7 @@
     },
     {
         "id": 26,
-        "name": "iPhone 11",
+        "name": "iphone 11",
         "price": 950,
         "color": "grey",
         "description": "lorem",
