@@ -69,8 +69,6 @@ class FilterComponent implements IComponent {
 
     resetFilters() {
         this.selectors.container.querySelectorAll('input').forEach((i) => {
-            const value = i.dataset.value;
-            const name = i.dataset.filter;
             i.checked = false;
         });
         (this.sliderYear.noUiSlider as noUiSlider.API).reset();
@@ -292,10 +290,10 @@ class FilterComponent implements IComponent {
         });
         // (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => () =>
         // (this.sliderPrice.noUiSlider as noUiSlider.API).on('change', (value, handle) => () => this.createQuery() );
-        (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
+        (this.sliderYear.noUiSlider as noUiSlider.API).on('change', () => {
             this.createQuery();
         });
-        (this.sliderPrice.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
+        (this.sliderPrice.noUiSlider as noUiSlider.API).on('change', () => {
             this.createQuery();
         });
     }

@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
 import FilterComponent from '../components/FilterComponent';
-import { ProductsComponent } from '../components/ProductsComponent';
 import SortComponent from '../components/SortComponent';
 import { Callbacks, IFilter, IProduct, IProductService, SortQuery } from '../types/types';
 import { Filter } from './Filter';
@@ -14,18 +13,23 @@ class ProductService implements IProductService {
     private filterQuery: IFilter | null;
     private sortQuery: SortQuery;
     private _cartData: IProduct[] = [];
+    private searchQuery: string;
+    private searchedData: IProduct[];
     private url: string = './assets/products_data/product.json';
     callbacks: Callbacks;
     private storeLocalStorage: StoreLocalStorage;
     private filterComponent!: FilterComponent;
     _sortComponent!: SortComponent | null;
     constructor() {
+        this.searchQuery = '';
+        this.searchedData = [];
         this.callbacks = {};
         this.sortQuery = { type: null };
         this.filterQuery = null;
         this.storeLocalStorage = new StoreLocalStorage()
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async getProductsData(_filter: IFilter | null): Promise<IProduct[]> {
         const responce = await fetch(this.url);
         const data = await responce.json();
@@ -65,7 +69,6 @@ class ProductService implements IProductService {
     }
 
     addCartItem(id: number) {
-
         const item = this.data.find((i) => i.id === id) as IProduct;
         const countItemInCart = this._cartData.filter((i) => i.id === id).length
         console.log('add', this._cartData.find((i) => i.id === id)?.onServe)
@@ -74,7 +77,6 @@ class ProductService implements IProductService {
         }
         console.log(item.onServe);
         if ((item.onServe as number) >= item.onStorage) {
-            //TODO call notification
             alert("Извините, недостаточно товаров на складе");
         }
         if (!countItemInCart) {
@@ -116,9 +118,10 @@ class ProductService implements IProductService {
     sortProcucts(query: SortQuery) {
         this.storeLocalStorage.setLocalStorage('sortQuery', query);
         const sort = new Sort(query, this.filteredData)
-        // this.filteredData = sort.sortData()
         this.sortQuery = query;
-        if (sort.sortData()) this.renderProducts(this.filteredData)
+        if (this.searchQuery && sort.sortData()) this.renderProducts(this.searchedData)
+
+        if (!this.searchQuery && sort.sortData()) this.renderProducts(this.filteredData)
     }
 
     searchProducts(query: string) {
@@ -130,25 +133,9 @@ class ProductService implements IProductService {
             alert('Not found!');
             return;
         }
+        this.searchQuery = query;
+        this.searchedData = searchedData; 
         this.renderProducts(searchedData);
-    }
-
-
-
-    getProductsCb(renderProductsCb: (data: IProduct[] | null) => void) {
-        this.callbacks.renderProducts = renderProductsCb;
-    }
-    getCartCb(renderCartCb: (data: IProduct[] | null) => void) {
-        this.callbacks.renderCart = renderCartCb;
-    }
-
-    set sortСomponent(component:SortComponent){
-        this._sortComponent = component;
-        console.log(this._sortComponent)
-    }
-
-    set setFilter(filter: FilterComponent) {
-        this.filterComponent = filter
     }
 
     renderProducts(data: IProduct[] | null): void {
@@ -161,7 +148,23 @@ class ProductService implements IProductService {
             this.callbacks.renderCart(data);
         }
     }
+    // callbacks handle
+    getProductsCb(renderProductsCb: (data: IProduct[] | null) => void) {
+        this.callbacks.renderProducts = renderProductsCb;
+    }
 
+    getCartCb(renderCartCb: (data: IProduct[] | null) => void) {
+        this.callbacks.renderCart = renderCartCb;
+    }
+
+    set sortСomponent(component: SortComponent) {
+        this._sortComponent = component;
+        console.log(this._sortComponent)
+    }
+
+    set setFilter(filter: FilterComponent) {
+        this.filterComponent = filter
+    }
 }
 
 export default ProductService;
