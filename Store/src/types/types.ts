@@ -20,6 +20,7 @@ export interface IFilter {
     priceTo: number;
     yearFrom: number;
     yearTo: number;
+    isPopular: boolean[];
 }
 
 export interface IProductService {

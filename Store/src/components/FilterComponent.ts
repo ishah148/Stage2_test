@@ -91,6 +91,7 @@ class FilterComponent implements IComponent {
             priceTo: 1000,
             yearFrom: 2010,
             yearTo: 2022,
+            isPopular: [false],
         };
         this.selectors.container.querySelectorAll('input').forEach((i) => {
             const value = i.dataset.value;
@@ -182,7 +183,12 @@ class FilterComponent implements IComponent {
                     class="filters-menu__reset btn btn-secondary">Reset</button>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
-            </div>`,
+            </div>
+            <div class="form-check form-switch mx-3">
+                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" data-value="false" data-filter="isPopular">
+                 <label class="form-check-label" for="flexSwitchCheckDefault">Show Only Popular</label>
+            </div>
+            `,
             body: `<div class="filters-menu__body offcanvas-body"></div>`,
 
             nouisliders: `
