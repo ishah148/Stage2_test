@@ -71,20 +71,26 @@ class ProductService implements IProductService {
     addCartItem(id: number) {
         const item = this.data.find((i) => i.id === id) as IProduct;
         const countItemInCart = this._cartData.filter((i) => i.id === id).length
+        const countItemsInCart = this.cartData.reduce((res, i) => {
+            return (res += i.onServe || 0);
+        }, 0);
         console.log('add', this._cartData.find((i) => i.id === id)?.onServe)
         if (!item.onServe) {
             item.onServe = this._cartData.find((i) => i.id === id)?.onServe;
         }
-        console.log(item.onServe);
+        if (countItemsInCart >= 20) {
+            alert('Cart is full!!!')
+        }
         if ((item.onServe as number) >= item.onStorage) {
             alert("Извините, недостаточно товаров на складе");
         }
-        if (!countItemInCart) {
-            item.onServe = 1;
-            this._cartData.push(item as IProduct)
-        } else if ((item.onServe as number) < item.onStorage) {
-            this._cartData.forEach((i) => i.id === id ? (i.onServe as number) += 1 : 'nothing')
-        }
+        if (this._cartData && countItemsInCart < 20)
+            if (!countItemInCart) {
+                item.onServe = 1;
+                this._cartData.push(item as IProduct)
+            } else if ((item.onServe as number) < item.onStorage) {
+                this._cartData.forEach((i) => i.id === id ? (i.onServe as number) += 1 : 'nothing')
+            }
         this.storeLocalStorage.setLocalStorage('cartData', this._cartData)
         this.renderCart(this._cartData);
     }
@@ -134,7 +140,7 @@ class ProductService implements IProductService {
             return;
         }
         this.searchQuery = query;
-        this.searchedData = searchedData; 
+        this.searchedData = searchedData;
         this.renderProducts(searchedData);
     }
 
