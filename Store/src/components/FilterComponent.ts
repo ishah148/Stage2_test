@@ -113,7 +113,7 @@ class FilterComponent implements IComponent {
             filterQuery.yearFrom = parseInt(yearFrom);
             filterQuery.yearTo = parseInt(yearTo);
         }
-        console.log('query send');
+
         this.sendQuery(filterQuery);
     }
     updateFilters(): void {
@@ -123,15 +123,16 @@ class FilterComponent implements IComponent {
         query.color.forEach((i) => checkedValues.push(i));
         query.company.forEach((i) => checkedValues.push(i));
         query.camResolution.forEach((i) => checkedValues.push(i));
-        console.log(checkedValues);
         // query.color.forEach(color => )
-        console.log(this.selectors.container.querySelectorAll('input'));
         this.selectors.container.querySelectorAll('input').forEach((i) => {
             if (checkedValues.includes(i.dataset.value as string)) {
-                // console.log(i);
+                //
                 i.checked = true;
             }
         });
+        console.log(this.sliderYear.noUiSlider as noUiSlider.API);
+        (this.sliderPrice.noUiSlider as noUiSlider.API).set([query.priceFrom, query.priceTo]);
+        (this.sliderYear.noUiSlider as noUiSlider.API).set([query.yearFrom, query.yearTo]);
     }
 
     renderCheckboxes() {
@@ -153,12 +154,14 @@ class FilterComponent implements IComponent {
 
         data.forEach((obj) => {
             // TODO remove duplicate
-            HTML.push(`<input class= "form-check-input" type ="checkbox" value ="" id = "id-${
+            const temp = `
+            <input class= "form-check-input" type ="checkbox" value ="" id = "id-${
                 obj[`${type as keyof typeof obj}`]
             }" data-filter="${type}" data-value="${obj[`${type as keyof typeof obj}`]}" >
              <label class="form-check-label" for="id-${obj[`${type as keyof typeof obj}`]}"> ${
                 obj[`${type as keyof typeof obj}`]
-            } </label><br>`);
+            } </label><br>`;
+            HTML.push(temp);
         });
         // console.dir(a);
         const uniqHTML = new Set(HTML);
@@ -271,7 +274,7 @@ class FilterComponent implements IComponent {
                 wNumb({ decimals: 0 }), // tooltip with default formatting
             ],
         });
-        // (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => () => console.log(123));
+        // (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => () =>
         // (this.sliderPrice.noUiSlider as noUiSlider.API).on('change', (value, handle) => () => this.createQuery() );
         (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
             this.createQuery();

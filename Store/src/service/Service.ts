@@ -17,7 +17,7 @@ class ProductService implements IProductService {
     private storeLocalStorage: StoreLocalStorage;
     private filterComponent!: FilterComponent;
     constructor() {
-        console.log(this);
+        
         // this.getProductsData(null);
         this.callbacks = {};
         this.sortQuery = { type: null };
@@ -63,7 +63,7 @@ class ProductService implements IProductService {
     }
 
     addCartItem(id: number) {
-        console.log(' addcart ',);
+        
         const item = this.data.find((i) => i.id === id) as IProduct;
         const countItemInCart = this._cartData.filter((i) => i.id === id).length
         if ((item.onServe as number) >= item.onStorage) {
