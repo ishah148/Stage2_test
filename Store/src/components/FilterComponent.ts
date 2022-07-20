@@ -130,7 +130,6 @@ class FilterComponent implements IComponent {
                 i.checked = true;
             }
         });
-        console.log(this.sliderYear.noUiSlider as noUiSlider.API);
         (this.sliderPrice.noUiSlider as noUiSlider.API).set([query.priceFrom, query.priceTo]);
         (this.sliderYear.noUiSlider as noUiSlider.API).set([query.yearFrom, query.yearTo]);
     }
@@ -163,7 +162,6 @@ class FilterComponent implements IComponent {
             } </label><br>`;
             HTML.push(temp);
         });
-        // console.dir(a);
         const uniqHTML = new Set(HTML);
         return [...uniqHTML].join('');
     }

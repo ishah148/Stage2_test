@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-useless-escape */
 import FilterComponent from '../components/FilterComponent';
+import { ProductsComponent } from '../components/ProductsComponent';
+import SortComponent from '../components/SortComponent';
 import { Callbacks, IFilter, IProduct, IProductService, SortQuery } from '../types/types';
 import { Filter } from './Filter';
 import StoreLocalStorage from './LocaStorage';
@@ -16,9 +18,8 @@ class ProductService implements IProductService {
     callbacks: Callbacks;
     private storeLocalStorage: StoreLocalStorage;
     private filterComponent!: FilterComponent;
+    _sortComponent!: SortComponent | null;
     constructor() {
-        
-        // this.getProductsData(null);
         this.callbacks = {};
         this.sortQuery = { type: null };
         this.filterQuery = null;
@@ -35,6 +36,7 @@ class ProductService implements IProductService {
         this.filteredData = data;
         if (sortQuery) {
             this.sortProcucts(sortQuery as SortQuery)
+            this._sortComponent?.updateStyle(sortQuery as SortQuery);
         }
         if (filterQuery) {
             this.filterComponent.setCurrentQuery = filterQuery as IFilter
@@ -63,9 +65,14 @@ class ProductService implements IProductService {
     }
 
     addCartItem(id: number) {
-        
+
         const item = this.data.find((i) => i.id === id) as IProduct;
         const countItemInCart = this._cartData.filter((i) => i.id === id).length
+        console.log('add', this._cartData.find((i) => i.id === id)?.onServe)
+        if (!item.onServe) {
+            item.onServe = this._cartData.find((i) => i.id === id)?.onServe;
+        }
+        console.log(item.onServe);
         if ((item.onServe as number) >= item.onStorage) {
             //TODO call notification
             alert("Извините, недостаточно товаров на складе");
@@ -119,6 +126,10 @@ class ProductService implements IProductService {
         if (!query) {
             searchedData = this.filteredData;
         }
+        if (!searchedData.length) {
+            alert('Not found!');
+            return;
+        }
         this.renderProducts(searchedData);
     }
 
@@ -131,7 +142,12 @@ class ProductService implements IProductService {
         this.callbacks.renderCart = renderCartCb;
     }
 
-    set setFilter(filter:FilterComponent){
+    set sortСomponent(component:SortComponent){
+        this._sortComponent = component;
+        console.log(this._sortComponent)
+    }
+
+    set setFilter(filter: FilterComponent) {
         this.filterComponent = filter
     }
 

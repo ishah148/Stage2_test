@@ -1,12 +1,14 @@
-/* eslint-disable prettier/prettier */
+import ProductService from '../service/Service';
 import { Callbacks, IComponent, IFilter, IProduct, SortQuery } from '../types/types';
 
 class SortComponent implements IComponent {
     buttons: NodeListOf<HTMLInputElement>;
     query: SortQuery;
     callbacks!: Callbacks;
+    _service: ProductService | null;
     constructor() {
         this.callbacks = {};
+        this._service = null;
         this.buttons = document.querySelectorAll('.sort__input');
         this.handleEvent();
         this.query = { type: null };
@@ -21,19 +23,20 @@ class SortComponent implements IComponent {
     handleEvent() {
         this.buttons.forEach((btn) => {
             btn.addEventListener('click', (e) => {
-                this.toggleCheckedBittons(e);
+                this.toggleCheckedButtons(e);
                 this.createQuery();
             });
         });
     }
-    toggleCheckedBittons(e: Event) {
+
+    toggleCheckedButtons(e: Event) {
         const tagret = e.target as HTMLInputElement;
         const pushedDataset = tagret.dataset.type as string;
         this.buttons.forEach((btn) => {
             if (btn.dataset.type !== pushedDataset) {
                 btn.checked = false;
             }
-        })
+        });
     }
 
     createQuery() {
@@ -50,8 +53,21 @@ class SortComponent implements IComponent {
             this.callbacks.sendSortQuery(query);
         }
     }
+
+    updateStyle(query: SortQuery) {
+        this.buttons.forEach((i) => {
+            if (i.dataset.type === query.type) {
+                i.checked = true;
+            }
+        });
+    }
+
     get getQuery() {
         return this.query;
+    }
+
+    set service(service: ProductService) {
+        this._service = service;
     }
 }
 
