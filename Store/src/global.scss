@@ -1,6 +1,9 @@
 // @import "custom";
 // @import "~bootstrap/scss/bootstrap";
-
+body{
+    max-width: 1440px;
+    margin: auto;
+}
 header {
     padding-top: 35px;
     padding-left: 20px;
@@ -138,6 +141,7 @@ main {
         // height: 161px;
         .card-text {
             height: 50px;
+            flex: 0 0 42px;
         }
         .product-card__price-and-color {
             padding: 0;

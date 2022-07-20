@@ -17,7 +17,6 @@ export class CartComponent {
     }
 
     handleEvents() {
-        console.log('handle');
         this.modalBody.querySelectorAll('.good-item__add-button').forEach((i) => {
             (i as HTMLElement).onclick = (e) => this.addCartItem(e);
         });
@@ -28,12 +27,12 @@ export class CartComponent {
     }
     addCartItem(e: Event) {
         const id = (e.target as HTMLElement).dataset.id;
-        console.log('', id);
+
         if (typeof id === 'string') this.service.addCartItem(+id);
     }
     removeCartItem(e: Event) {
         const id = (e.target as HTMLElement).dataset.id;
-        console.log('', id);
+
         if (typeof id === 'string') this.service.removeCartItem(+id);
     }
 
@@ -53,7 +52,7 @@ export class CartComponent {
     }
 
     updateCartCount() {
-        // console.log('', this.cartCountEl.textContent);
+        //
         (this.cartCountEl.textContent as string) =
             this.service.cartData.reduce((res, i) => {
                 return (res += i.onServe || 0);

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Callbacks, IComponent, IFilter, IProduct } from '../types/types';
 import * as noUiSlider from 'nouislider';
 import { target } from 'nouislider';
@@ -21,10 +22,11 @@ class FilterComponent implements IComponent {
     private selectors!: Selectors;
     private sliderPrice!: noUiSlider.target;
     private sliderYear!: noUiSlider.target;
-    private filterQuery!: IFilter;
+    private filterQuery: IFilter | null;
     callbacks!: Callbacks;
 
     constructor() {
+        this.filterQuery = null;
         this.callbacks = {};
         this.createComponents();
         this.render();
@@ -67,8 +69,6 @@ class FilterComponent implements IComponent {
 
     resetFilters() {
         this.selectors.container.querySelectorAll('input').forEach((i) => {
-            const value = i.dataset.value;
-            const name = i.dataset.filter;
             i.checked = false;
         });
         (this.sliderYear.noUiSlider as noUiSlider.API).reset();
@@ -90,12 +90,16 @@ class FilterComponent implements IComponent {
             priceTo: 1000,
             yearFrom: 2010,
             yearTo: 2022,
+            isPopular: false,
         };
         this.selectors.container.querySelectorAll('input').forEach((i) => {
             const value = i.dataset.value;
             const name = i.dataset.filter;
-            if (i.checked) {
+            if (i.checked && name !== 'isPopular') {
                 (filterQuery[`${name as keyof typeof filterQuery}`] as string[]).push(value as string);
+            }
+            if (i.checked && name === 'isPopular') {
+                filterQuery.isPopular = true;
             }
         });
         const priceFrom = document.querySelector('#sliderPrice > div > div:nth-child(2) > div > div.noUi-tooltip')
@@ -112,8 +116,35 @@ class FilterComponent implements IComponent {
             filterQuery.yearFrom = parseInt(yearFrom);
             filterQuery.yearTo = parseInt(yearTo);
         }
-        console.log('query send');
+
         this.sendQuery(filterQuery);
+    }
+    updateFilters(): void {
+        const popularBtn = document.getElementById('popular-filter') as HTMLInputElement;
+        const query = this.filterQuery;
+        if (!query) return;
+        const checkedValues: string[] = [];
+        query.color.forEach((i) => checkedValues.push(i));
+        query.company.forEach((i) => checkedValues.push(i));
+        query.camResolution.forEach((i) => checkedValues.push(i));
+        console.log('', popularBtn);
+        if (popularBtn && typeof popularBtn.dataset.filter) {
+            // (popularBtn).dataset.filter.isPopular = query.isPopular;
+            (popularBtn.checked) = query.isPopular;
+        }
+
+        this.selectors.container.querySelectorAll('input').forEach((i) => {
+            if (checkedValues.includes(i.dataset.value as string) && i.dataset.filter !== 'isPopular') {
+                i.checked = true;
+            }
+            // console.log('i.dataset.filter', i.dataset.filter);
+            // console.log('i.dataset.value', i.dataset.value);
+            if (i.dataset.filter === 'isPopular' && i.dataset.value === 'true') {
+                console.log('', 888);
+            }
+        });
+        (this.sliderPrice.noUiSlider as noUiSlider.API).set([query.priceFrom, query.priceTo]);
+        (this.sliderYear.noUiSlider as noUiSlider.API).set([query.yearFrom, query.yearTo]);
     }
 
     renderCheckboxes() {
@@ -123,6 +154,7 @@ class FilterComponent implements IComponent {
             'beforeend',
             this.getCheckboxHTML(this.data, 'camResolution')
         );
+        this.updateFilters();
     }
 
     getCheckboxHTML(data: IProduct[], type: string): string {
@@ -134,16 +166,19 @@ class FilterComponent implements IComponent {
 
         data.forEach((obj) => {
             // TODO remove duplicate
-            HTML.push(`<input class= "form-check-input" type ="checkbox" value ="" id = "id-${
-                obj[`${type as keyof typeof obj}`]
-            }" data-filter="${type}" data-value="${obj[`${type as keyof typeof obj}`]}" >
-        <label class="form-check-label" for="id-${obj[`${type as keyof typeof obj}`]}"> ${
-                obj[`${type as keyof typeof obj}`]
-            } </label><br>`);
+            const temp = `
+            <input class= "form-check-input" type ="checkbox" value ="" id = "id-${obj[`${type as keyof typeof obj}`]
+                }" data-filter="${type}" data-value="${obj[`${type as keyof typeof obj}`]}" >
+             <label class="form-check-label" for="id-${obj[`${type as keyof typeof obj}`]}"> ${obj[`${type as keyof typeof obj}`]
+                } </label><br>`;
+            HTML.push(temp);
         });
-        // console.dir(a);
         const uniqHTML = new Set(HTML);
         return [...uniqHTML].join('');
+    }
+
+    set setCurrentQuery(query: IFilter) {
+        this.filterQuery = query;
     }
 
     createComponents() {
@@ -158,7 +193,12 @@ class FilterComponent implements IComponent {
                     class="filters-menu__reset btn btn-secondary">Reset</button>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
-            </div>`,
+            </div>
+            <div class="form-check form-switch mx-3">
+                 <input class="form-check-input" type="checkbox" id="popular-filter" data-value="false" data-filter="isPopular">
+                 <label class="form-check-label" for="popular-filter">Show Only Popular</label>
+            </div>
+            `,
             body: `<div class="filters-menu__body offcanvas-body"></div>`,
 
             nouisliders: `
@@ -248,12 +288,12 @@ class FilterComponent implements IComponent {
                 wNumb({ decimals: 0 }), // tooltip with default formatting
             ],
         });
-        // (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => () => console.log(123));
+        // (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => () =>
         // (this.sliderPrice.noUiSlider as noUiSlider.API).on('change', (value, handle) => () => this.createQuery() );
-        (this.sliderYear.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
+        (this.sliderYear.noUiSlider as noUiSlider.API).on('change', () => {
             this.createQuery();
         });
-        (this.sliderPrice.noUiSlider as noUiSlider.API).on('change', (value, handle) => {
+        (this.sliderPrice.noUiSlider as noUiSlider.API).on('change', () => {
             this.createQuery();
         });
     }

@@ -37,7 +37,7 @@ class SearchComponent implements IComponent {
     }
 
     initEvents(): void {
-        this.searchBarInput.onchange = (e) => this.search(e);
+        this.searchBarInput.oninput = (e) => this.search(e);
         // this.searchClear.onclick = () => this.resetSearch();
     }
 }

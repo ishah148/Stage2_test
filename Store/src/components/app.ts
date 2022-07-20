@@ -9,7 +9,7 @@ const st = new StoreComponent();
 // function getLocalStorage(name: string) {
 //     if (localStorage.getItem(name)) {
 //         const data = localStorage.getItem(name) || '';
-//         console.log(JSON.parse(data));
+//
 //     }
 // }
 
