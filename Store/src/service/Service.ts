@@ -122,12 +122,21 @@ class ProductService implements IProductService {
     }
 
     sortProcucts(query: SortQuery) {
+        // debugger;
         this.storeLocalStorage.setLocalStorage('sortQuery', query);
-        const sort = new Sort(query, this.filteredData)
+       
         this.sortQuery = query;
-        if (this.searchQuery && sort.sortData()) this.renderProducts(this.searchedData)
+        if (this.searchQuery) {
+            const sort = new Sort(query, this.searchedData);
+            sort.sortData();
+            this.renderProducts(this.searchedData)
+        }
 
-        if (!this.searchQuery && sort.sortData()) this.renderProducts(this.filteredData)
+        if (!this.searchQuery) {
+            const sort = new Sort(query, this.filteredData);
+            sort.sortData();
+            this.renderProducts(this.filteredData)
+        } 
     }
 
     searchProducts(query: string) {
