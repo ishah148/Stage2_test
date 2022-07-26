@@ -7,7 +7,8 @@
         "start": "webpack serve --open --config ./webpack.config.js --env mode=dev",
         "build": "webpack --config ./webpack.config.js --env mode=prod",
         "lint": "eslint . --ext .ts",
-        "fix": "eslint . --ext .ts --fix"
+        "fix": "eslint . --ext .ts --fix",
+        "test": "jest"
     },
     "repository": {
         "type": "git",
@@ -20,6 +21,7 @@
     "devDependencies": {
         "@popperjs/core": "^2.11.5",
         "@types/bootstrap": "^5.1.12",
+        "@types/jest": "^28.1.6",
         "@typescript-eslint/eslint-plugin": "^5.30.0",
         "@typescript-eslint/parser": "^5.30.0",
         "autoprefixer": "^10.4.7",
@@ -35,12 +37,14 @@
         "eslint-webpack-plugin": "^3.2.0",
         "file-loader": "^6.2.0",
         "html-webpack-plugin": "^5.2.0",
+        "jest": "^28.1.3",
         "nouislider": "^15.6.0",
         "postcss-loader": "^7.0.1",
         "prettier": "2.2.1",
         "sass": "^1.53.0",
         "sass-loader": "^13.0.2",
         "style-loader": "^2.0.0",
+        "ts-jest": "^28.0.7",
         "ts-loader": "^9.3.1",
         "typescript": "^4.7.4",
         "webpack": "^5.73.0",

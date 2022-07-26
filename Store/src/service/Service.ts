@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-useless-escape */
 import FilterComponent from '../components/FilterComponent';
 import SortComponent from '../components/SortComponent';
 import { Callbacks, IFilter, IProduct, IProductService, SortQuery } from '../types/types';
@@ -12,8 +10,8 @@ class ProductService implements IProductService {
     private filteredData: IProduct[] = []; //  current data for rendering components
     private filterQuery: IFilter | null;
     private sortQuery: SortQuery;
-    private _cartData: IProduct[] = [];
     private searchQuery: string;
+    private _cartData: IProduct[] = [];
     private searchedData: IProduct[];
     private url: string = './assets/products_data/product.json';
     callbacks: Callbacks;
@@ -26,7 +24,7 @@ class ProductService implements IProductService {
         this.callbacks = {};
         this.sortQuery = { type: null };
         this.filterQuery = null;
-        this.storeLocalStorage = new StoreLocalStorage()
+        this.storeLocalStorage = new StoreLocalStorage();
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -39,15 +37,14 @@ class ProductService implements IProductService {
         const cartData = this.storeLocalStorage.getLocalStorage('cartData');
         this.filteredData = data;
         if (sortQuery) {
-            this.sortProcucts(sortQuery as SortQuery)
+            this.sortProcucts(sortQuery as SortQuery);
             this._sortComponent?.updateStyle(sortQuery as SortQuery);
         }
         if (filterQuery) {
-            this.filterComponent.setCurrentQuery = filterQuery as IFilter
+            this.filterComponent.setCurrentQuery = filterQuery as IFilter;
             this.filterData(filterQuery as IFilter);
             this.filterComponent.updateFilters();
-        }
-        else {
+        } else {
             this.renderProducts(data);
             this.filteredData = data;
         }
@@ -62,7 +59,7 @@ class ProductService implements IProductService {
         return this.getProductsData(null);
     }
     get cartData(): IProduct[] {
-        return this._cartData
+        return this._cartData;
     }
     setСartData(data: IProduct[]): void {
         this._cartData = data;
@@ -70,28 +67,28 @@ class ProductService implements IProductService {
 
     addCartItem(id: number) {
         const item = this.data.find((i) => i.id === id) as IProduct;
-        const countItemInCart = this._cartData.filter((i) => i.id === id).length
+        const countItemInCart = this._cartData.filter((i) => i.id === id).length;
         const countItemsInCart = this.cartData.reduce((res, i) => {
             return (res += i.onServe || 0);
         }, 0);
-        console.log('add', this._cartData.find((i) => i.id === id)?.onServe)
+        console.log('add', this._cartData.find((i) => i.id === id)?.onServe);
         if (!item.onServe) {
             item.onServe = this._cartData.find((i) => i.id === id)?.onServe;
         }
         if (countItemsInCart >= 20) {
-            alert('Cart is full!!!')
+            alert('Cart is full!!!');
         }
         if ((item.onServe as number) >= item.onStorage) {
-            alert("Извините, недостаточно товаров на складе");
+            alert('Извините, недостаточно товаров на складе');
         }
         if (this._cartData && countItemsInCart < 20)
             if (!countItemInCart) {
                 item.onServe = 1;
-                this._cartData.push(item as IProduct)
+                this._cartData.push(item as IProduct);
             } else if ((item.onServe as number) < item.onStorage) {
-                this._cartData.forEach((i) => i.id === id ? (i.onServe as number) += 1 : 'nothing')
+                this._cartData.forEach((i) => (i.id === id ? ((i.onServe as number) += 1) : 'nothing'));
             }
-        this.storeLocalStorage.setLocalStorage('cartData', this._cartData)
+        this.storeLocalStorage.setLocalStorage('cartData', this._cartData);
         this.renderCart(this._cartData);
     }
 
@@ -101,9 +98,9 @@ class ProductService implements IProductService {
             item.onServe = 0;
             this._cartData = this._cartData.filter((i) => (i.onServe as number) > 0);
         } else {
-            this._cartData.forEach((i) => i.id === id ? (i.onServe as number) -= 1 : 'nothing')
+            this._cartData.forEach((i) => (i.id === id ? ((i.onServe as number) -= 1) : 'nothing'));
         }
-        this.storeLocalStorage.setLocalStorage('cartData', this._cartData)
+        this.storeLocalStorage.setLocalStorage('cartData', this._cartData);
         this.renderCart(this._cartData);
     }
 
@@ -117,26 +114,19 @@ class ProductService implements IProductService {
         this.storeLocalStorage.setLocalStorage('filterQuery', query);
         const filter = new Filter(query, this.data);
         this.filterQuery = query;
-        this.filteredData = filter.filterData()
-        if (filter.filterData()) this.renderProducts(filter.filterData())
+        this.filteredData = filter.filterData();
+        if (filter.filterData()) this.renderProducts(filter.filterData());
     }
 
     sortProcucts(query: SortQuery) {
-        // debugger;
         this.storeLocalStorage.setLocalStorage('sortQuery', query);
-       
+        const sort = new Sort(query, this.filteredData);
         this.sortQuery = query;
-        if (this.searchQuery) {
-            const sort = new Sort(query, this.searchedData);
-            sort.sortData();
-            this.renderProducts(this.searchedData)
+        if (this.searchQuery && sort.sortData()) {
+            this.renderProducts(this.searchedData);
+            console.log('fq', this.filterQuery);
         }
-
-        if (!this.searchQuery) {
-            const sort = new Sort(query, this.filteredData);
-            sort.sortData();
-            this.renderProducts(this.filteredData)
-        } 
+        if (!this.searchQuery && sort.sortData()) this.renderProducts(this.filteredData);
     }
 
     searchProducts(query: string) {
@@ -174,11 +164,11 @@ class ProductService implements IProductService {
 
     set sortСomponent(component: SortComponent) {
         this._sortComponent = component;
-        console.log(this._sortComponent)
+        console.log(this._sortComponent);
     }
 
     set setFilter(filter: FilterComponent) {
-        this.filterComponent = filter
+        this.filterComponent = filter;
     }
 }
 
