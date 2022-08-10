@@ -1,15 +1,26 @@
+import Button from "@mui/material/Button"
 import React, { useState } from "react"
 
 const ButtonShah = () => {
   // let count = 1
-  const [first, setfirst] = useState(0)
+  const [incr, setincr] = useState(0)
   function increment() {
-    setfirst(first + 1)
+    setincr(incr + 1)
   }
+  function decrement() {
+    setincr(incr <= 1 ? incr : incr - 1);
+    // setincr(incr - 1)
+  }
+
   return (
     <div>
-      <button onClick={increment}></button>
-      <h1>{first}</h1>
+      <Button onClick={increment} variant="contained">
+        Plus
+      </Button>
+      <Button onClick={decrement} variant="contained">
+        Minus
+      </Button>
+      <h1>{incr}</h1>
     </div>
   )
 }
