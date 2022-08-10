@@ -1,15 +1,16 @@
 import React from "react"
 import logo from "./logo.svg"
 import AboutPage from "./components/shah"
+// import ButtonS from "./components/ButtonS"
 import "./App.css"
-import ButtonS from "./components/buttonS"
+import ButtonShah from "./components/ButtonShah"
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <h1>react shah</h1>
         <AboutPage />
-        <ButtonS />
+        <ButtonShah/>
         <AboutPage />
       </header>
     </div>
