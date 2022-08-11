@@ -1,12 +1,14 @@
-import React from 'react';
-import '../styles/card.scss'
-const Card = () => {
-    return (
-        <div className='card'>
-            <p className='one'>1</p>
-            <p className='two'>1</p>
-        </div>
-    );
-};
+import React from "react"
+import "../styles/card.scss"
+import { TestProps } from "../types"
+const Card = (props: TestProps) => {
 
-export default Card;
+  return (
+    <div className="card">
+      <p className="one">{props.id}</p>
+      <p className="two">{props.descr}</p>
+    </div>
+  )
+}
+
+export default Card

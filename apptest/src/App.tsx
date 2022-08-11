@@ -5,6 +5,7 @@ import "./App.scss"
 import ButtonShah from "./components/UseState"
 import Input from "./components/Input"
 import Card from "./components/Card"
+import CardStorage from "./components/CardStorage"
 
 function App() {
   return (
@@ -15,11 +16,10 @@ function App() {
         <ButtonShah />
         <Input />
         <div className="card__wrapper">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Card descr="one" id={1} />
         </div>
+          <Card descr="five" id={5} props={{ descr: "one", id: 1 }} />
+          <CardStorage/>
       </header>
     </div>
   )
